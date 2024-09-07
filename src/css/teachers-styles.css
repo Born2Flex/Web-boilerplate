@@ -1,0 +1,86 @@
+.filters {
+  display: flex;
+  align-items: center;
+  color: #797982;
+  font-size: 1.2rem;
+  margin-bottom: var(--section-margin);
+}
+
+.filters label {
+  margin-right: 1rem;
+}
+
+.filters select {
+  background-color: white;
+  border: 1px solid gray;
+  font-size: inherit;
+  padding: 0.5rem;
+}
+
+.separator {
+  position: relative;
+  width: 1px;
+  height: 3rem;
+  margin: 0 1rem;
+}
+
+.separator::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 2px;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      lightgray,
+      lightgray 2px,
+      transparent 4px,
+      transparent 6px
+    );
+}
+
+.all-teachers {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: var(--cards-gap);
+  padding: 2rem 2rem 0 2rem;
+}
+
+.card {
+  width: var(--card-width);
+  display: flex;
+  flex-direction: column;
+}
+
+.teacher-image img {
+  display: block;
+  width: 100%;
+  margin-bottom: 1rem;
+  border: 5px solid var(--light-orange);
+  border-radius: 50%;
+}
+
+.teacher-image img:hover {
+  border: 5px solid darkred;
+  cursor: pointer;
+}
+
+.teacher-name {
+  color: black;
+  font-size: 1.7rem;
+  text-align: center;
+  margin-bottom: 0.7rem;
+}
+
+.teacher-specialty {
+  color: gray;
+  font-size: 1rem;
+  margin-bottom: 0.7rem;
+}
+
+.teacher-country {
+  font-size: 0.9rem;
+  color: black;
+}
