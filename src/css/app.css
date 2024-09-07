@@ -10,6 +10,9 @@
 /* Teacher styles */
 @import url('./teachers-styles.css');
 
+/* Scroll container */
+@import url('./scroll-container.css');
+
 :root {
   --max-width: 1300px;
   --container-top-padding: 2.2rem;
@@ -191,44 +194,4 @@ td:first-child {
 
 .page-link:hover {
   color: #797982;
-}
-
-.scroll-container {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  overflow: hidden;
-  position: relative;
-  padding: 0 2rem;
-}
-
-.scroll {
-  display: flex;
-  gap: var(--cards-gap);
-  margin-bottom: 1rem;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  scrollbar-width: none;
-}
-
-.scroll::-webkit-scrollbar {
-  display: none;
-}
-
-.scroll-btn {
-  background: none;
-  border: none;
-  position: absolute;
-  top: 50%;
-  transform: translateY(calc(-50% - 2rem));
-  cursor: pointer;
-  z-index: 1;
-}
-
-.scroll-btn.left {
-  left: 0;
-}
-
-.scroll-btn.right {
-  right: 0;
 }

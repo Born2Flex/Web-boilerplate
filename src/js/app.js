@@ -12,7 +12,7 @@ const rightBtn = document.querySelector('.scroll-btn.right');
 leftBtn.addEventListener('click', () => {
   scrollContainer.scrollBy({
     left: -200,
-    behavior: 'smooth'
+    behavior: 'smooth',
   });
 });
 
