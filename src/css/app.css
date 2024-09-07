@@ -12,7 +12,8 @@
 
 /* Scroll container */
 @import url('./scroll-container.css');
-@import url('popup.css');
+@import url('./popup.css');
+@import url('./card.css');
 
 :root {
   --max-width: 1300px;
@@ -27,7 +28,7 @@
   --text-font-size: 1.2rem;
   --section-margin: 2.2rem;
   --card-width: 160px;
-  --cards-gap: 3.5rem;
+  --cards-gap: 5%;
 }
 
 body {
