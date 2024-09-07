@@ -15,7 +15,7 @@
                 <h1>Teachinder</h1>
                 <form class="search-form">
                     <input id="search-input" type="text" placeholder="Name or note to search"/>
-                    <button type="submit">Search</button>
+                    <button class="main-btn" type="submit">Search</button>
                 </form>
             </section>
             <nav class="navigation" aria-label="site navigation">
@@ -25,7 +25,7 @@
                     <li><a href="#favorites">Favorites</a></li>
                     <li><a href="#about">About</a></li>
                 </ul>
-                <button>Add teacher</button>
+                <button class="main-btn">Add teacher</button>
             </nav>
         </header>
         <hr/>
@@ -217,38 +217,90 @@
                     <td>England</td>
                 </tr>
             </table>
+            <div class="pagination">
+                <a href="#" class="page-link">1</a>
+                <a href="#" class="page-link">2</a>
+                <a href="#" class="page-link">3</a>
+                <span>...</span>
+                <a href="#" class="page-link">Last</a>
+            </div>
         </section>
         <hr/>
         <section id="favorites">
             <h2>Favorites</h2>
-            <div class="scroll">
-                <div class="card">
-                    <div class="teacher-image">
-                        <img src="./images/photo.jpg" alt="Walter"/>
+            <div class="scroll-container">
+                <button class="scroll-btn left">
+                    <img src="./images/arrow-left.png" alt="Scroll Left" />
+                </button>
+                <div class="scroll">
+                    <div class="card">
+                        <div class="teacher-image">
+                            <img src="./images/photo.jpg" alt="Walter"/>
+                        </div>
+                        <div class="teacher-info">
+                            <h3 class="teacher-name">Ihor Tkachuk</h3>
+                            <p class="teacher-country">Ukraine</p>
+                        </div>
                     </div>
-                    <div class="teacher-info">
-                        <h3 class="teacher-name">Ihor Tkachuk</h3>
-                        <p class="teacher-country">Ukraine</p>
+                    <div class="card">
+                        <div class="teacher-image">
+                            <img src="./images/photo.jpg" alt="Walter"/>
+                        </div>
+                        <div class="teacher-info">
+                            <h3 class="teacher-name">Ihor Tkachuk</h3>
+                            <p class="teacher-country">Ukraine</p>
+                        </div>
                     </div>
+                    <div class="card">
+                        <div class="teacher-image">
+                            <img src="./images/photo.jpg" alt="Walter"/>
+                        </div>
+                        <div class="teacher-info">
+                            <h3 class="teacher-name">Ihor Tkachuk</h3>
+                            <p class="teacher-country">Ukraine</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="teacher-image">
+                            <img src="./images/photo.jpg" alt="Walter"/>
+                        </div>
+                        <div class="teacher-info">
+                            <h3 class="teacher-name">Ihor Tkachuk</h3>
+                            <p class="teacher-country">Ukraine</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="teacher-image">
+                            <img src="./images/photo.jpg" alt="Walter"/>
+                        </div>
+                        <div class="teacher-info">
+                            <h3 class="teacher-name">Ihor Tkachuk</h3>
+                            <p class="teacher-country">Ukraine</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="teacher-image">
+                            <img src="./images/photo.jpg" alt="Walter"/>
+                        </div>
+                        <div class="teacher-info">
+                            <h3 class="teacher-name">Ihor Tkachuk</h3>
+                            <p class="teacher-country">Ukraine</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="teacher-image">
+                            <img src="./images/photo.jpg" alt="Walter"/>
+                        </div>
+                        <div class="teacher-info">
+                            <h3 class="teacher-name">Ihor Tkachuk</h3>
+                            <p class="teacher-country">Ukraine</p>
+                        </div>
+                    </div>
+
                 </div>
-                <div class="card">
-                    <div class="teacher-image">
-                        <img src="./images/photo.jpg" alt="Walter"/>
-                    </div>
-                    <div class="teacher-info">
-                        <h3 class="teacher-name">Ihor Tkachuk</h3>
-                        <p class="teacher-country">Ukraine</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="teacher-image">
-                        <img src="./images/photo.jpg" alt="Walter"/>
-                    </div>
-                    <div class="teacher-info">
-                        <h3 class="teacher-name">Ihor Tkachuk</h3>
-                        <p class="teacher-country">Ukraine</p>
-                    </div>
-                </div>
+                <button class="scroll-btn right">
+                    <img src="./images/arrow-right.png" alt="Scroll Right" />
+                </button>
             </div>
         </section>
         <hr/>
@@ -271,7 +323,7 @@
                     <li><a href="#favorites">Favorites</a></li>
                     <li><a href="#about">About</a></li>
                 </ul>
-                <button>Add teacher</button>
+                <button class="main-btn">Add teacher</button>
             </nav>
         </footer>
     </section>
