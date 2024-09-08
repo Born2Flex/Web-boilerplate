@@ -14,7 +14,7 @@
         <section class="site-title">
             <h1 id="logo">Teachinder</h1>
             <form class="search-form">
-                <input id="search-input" type="text" placeholder="Name or note to search"/>
+                <input id="search-input" type="text" placeholder="Name, note or age to search"/>
                 <button class="main-btn" type="submit">Search</button>
             </form>
         </section>
@@ -32,39 +32,53 @@
     <section id="teachers">
         <h2>Top Teachers</h2>
         <div class="filters">
-            <label for="age">Age</label>
-            <select name="age" id="age">
-                <option>18-31</option>
-                <option>32-50</option>
-                <option>51-60</option>
-            </select>
+            <div class="search-option">
+                <label for="age">Age</label>
+                <select name="age" id="age">
+                    <option>18-31</option>
+                    <option>32-50</option>
+                    <option>51-60</option>
+                </select>
+            </div>
 
             <span class="separator"></span>
 
-            <label for="region">Region</label>
-            <select id="region">
-                <option value="europe">Europe</option>
-                <option value="asia">Asia</option>
-                <option value="america">America</option>
-            </select>
+            <div class="search-option">
+                <label for="region">Region</label>
+                <select id="region">
+                    <option value="europe">Europe</option>
+                    <option value="asia">Asia</option>
+                    <option value="america">America</option>
+                </select>
+            </div>
+
 
             <span class="separator"></span>
 
-            <label for="sex">Sex</label>
-            <select id="sex">
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-            </select>
+            <div class="search-option">
+                <label for="sex">Sex</label>
+                <select id="sex">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+            </div>
+
 
             <span class="separator"></span>
 
-            <input type="checkbox" id="photo">
-            <label for="photo">Only with photo</label>
+            <div class="search-option">
+                <input type="checkbox" id="photo">
+                <label for="photo">Only with photo</label>
+            </div>
+
 
             <span class="separator"></span>
 
-            <input type="checkbox" id="only-favorites">
-            <label for="only-favorites">Only favorites</label>
+            <div class="search-option">
+                <input type="checkbox" id="only-favorites">
+                <label for="only-favorites">Only favorites</label>
+            </div>
+
         </div>
         <div class="all-teachers">
             <div class="card">
@@ -334,7 +348,7 @@
             <h1>Add teacher</h1>
             <button id="add-close-btn" class="close-popup-btn">✖</button>
         </header>
-        <form id="add-form">
+        <form id="add-teacher-form">
             <div class="form-field">
                 <label for="name">Name</label>
                 <input id="name" type="text"/>
@@ -390,7 +404,7 @@
                 <label for="female">Female</label>
                 <input type="radio" id="female" name="contact" value="female" />
             </div>
-            <div class="form-field-horizontal">
+            <div class="form-field-horizontal color-picker">
                 <label for="color">Background color</label>
                 <input id="color" type="color">
             </div>
@@ -410,21 +424,21 @@
             <button id="info-close-btn" class="close-popup-btn">✖</button>
         </header>
         <div class="teacher-info">
-            <div class="main-info">
+            <div class="main-teacher-info">
                 <div class="teacher-image">
-                    <img src="./images/photo.jpg" />
+                    <img src="./images/photo.jpg" alt="Walter"/>
                 </div>
                 <div class="short-info">
                     <h1>Ihor Tkachuk</h1>
                     <h2>Chemistry</h2>
                     <p>Kyiv, Ukraine</p>
                     <p>35, Male</p>
-                    <p>email@gmail.com</p>
+                    <p class="teacher-email">ihor_tkachuk@domain.com</p>
                     <p>+3832214993123</p>
                 </div>
             </div>
             <p class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus ad animi, autem cumque dolorem eius eum in inventore ipsam itaque laudantium libero nihil odio porro repellat saepe sint vero vitae!</p>
-            <p class="map-toggle">toggle map</p>
+            <div class="map-toggle"><span>toggle map</span></div>
         </div>
     </div>
 </div>

@@ -18,17 +18,31 @@ const teachersImages = document.querySelectorAll('.teacher-image')
 const teacherInfoPopup = document.querySelector('#teacher-info');
 
 leftBtn.addEventListener('click', () => {
-  scrollContainer.scrollBy({
-    left: -200,
-    behavior: 'smooth',
-  });
+  if (window.innerWidth > 600) {
+    scrollContainer.scrollBy({
+      left: -200,
+      behavior: 'smooth'
+    });
+  } else {
+    scrollContainer.scrollBy({
+      left: -282,
+      behavior: 'smooth'
+    });
+  }
 });
 
 rightBtn.addEventListener('click', () => {
-  scrollContainer.scrollBy({
-    left: 200,
-    behavior: 'smooth'
-  });
+  if (window.innerWidth > 600) {
+    scrollContainer.scrollBy({
+      left: 200,
+      behavior: 'smooth'
+    });
+  } else {
+    scrollContainer.scrollBy({
+      left: 282,
+      behavior: 'smooth'
+    });
+  }
 });
 
 addTeacherBtn.forEach(btn => btn.addEventListener('click', () => {

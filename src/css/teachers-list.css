@@ -1,3 +1,4 @@
+/* Filter of list */
 .filters {
   display: flex;
   align-items: center;
@@ -20,6 +21,11 @@
   border: 1px solid gray;
   font-size: inherit;
   padding: 0.5rem;
+}
+
+.search-option {
+  display: flex;
+  align-items: center;
 }
 
 .separator {
@@ -45,13 +51,10 @@
     );
 }
 
+/* Teacher list styles */
 .all-teachers {
-  /*display: flex;*/
-  /*flex-wrap: wrap;*/
-  /*justify-content: flex-start;*/
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  /*gap: 5%;*/
   row-gap: 2rem;
   padding: 2rem 2rem 0 2rem;
   margin-bottom: 1rem;
@@ -64,6 +67,15 @@
   }
 }
 
+@media (max-width: 1440px) {
+  .filters {
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 1rem;
+    font-size: 0.9rem;
+  }
+}
+
 @media (max-width: 1275px) {
   .all-teachers {
     grid-template-columns: repeat(3, 1fr);
@@ -73,6 +85,7 @@
 @media (max-width: 1000px) {
   .all-teachers {
     grid-template-columns: repeat(2, 1fr);
+    padding-top: 2rem;
   }
 }
 

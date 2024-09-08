@@ -1,5 +1,6 @@
 .scroll-container {
   display: flex;
+  justify-content: center;
   align-items: center;
   width: 100%;
   position: relative;
@@ -47,4 +48,19 @@
 
 .scroll-btn:hover {
   filter: brightness(50%);
+}
+
+@media (max-width: 600px) {
+  .scroll-btn.left {
+    left: 0;
+  }
+
+  .scroll-btn.right {
+    right: 0;
+  }
+
+  .scroll {
+    width: 250px;
+    gap: 2rem;
+  }
 }

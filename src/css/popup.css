@@ -38,113 +38,15 @@
 }
 
 .close-popup-btn {
+  color: white;
+  font-size: 2rem;
   background: none;
   border: none;
-  color: white;
 }
 
-#add-form {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 2rem 3rem;
-  overflow: hidden;
-}
-
-.field-group {
-  display: flex;
-  justify-content: space-between;
-  flex-grow: 1;
-  gap: 1.5rem;
-  width: 100%;
-  margin-top: 1rem;
-}
-
-.form-field {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 100%;
-}
-
-form > .form-field:not(:first-child) {
-  margin-top: 1rem;
-}
-
-.form-field-horizontal {
-  margin-top: 1rem;
-}
-
-.form-field-horizontal label:first-child {
-  padding-right: 2rem;
-}
-
-.form-field input,
-.form-field select,
-.form-field textarea {
-  width: 100%;
-  background-color: white;
-  font-size: 1rem;
-  padding: 0.5rem;
-  margin-top: 0.5rem;
-  border: 1px solid gray;
-  border-radius: 2px;
-}
-
-.form-field textarea {
-  max-width: 100%;
-}
-
-#form-submit-btn {
-  font-size: 2rem;
-  width: 100%;
-  margin-top: 2rem;
-}
-
-.close-popup-btn {
-  font-size: 2rem;
-}
-
-.popup > .teacher-info-popup {
-  display: flex;
-  flex-direction: column;
-  width: 700px;
-  background-color: white;
-  overflow: hidden;
-}
-
-.teacher-info {
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
-}
-
-.popup .teacher-image {
-  flex: 1;
-  padding-right: 1rem;
-}
-
-.popup .teacher-image img {
-  width: 100%;
-  height: auto;
-}
-
-.teacher-info-popup .main-info {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-}
-
-.short-info {
-  flex: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding-left: 1rem;
-}
-
-.description {
-  margin-top: 1rem;
-  text-align: left;
+@media (max-width: 700px) {
+  .popup header h1,
+  .close-popup-btn {
+    font-size: 1.5rem;
+  }
 }

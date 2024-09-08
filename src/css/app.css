@@ -5,15 +5,14 @@
 @import url('./normalize.css');
 
 /* Navigation styles */
-@import url('./navigation-styles.css');
-
-/* Teacher styles */
-@import url('./teachers-styles.css');
-
-/* Scroll container */
+@import url('navigation.css');
+@import url('teachers-list.css');
 @import url('./scroll-container.css');
 @import url('./popup.css');
 @import url('./card.css');
+@import url('./table.css');
+@import url('./add-teacher-popup.css');
+@import url('./teacher-info-popup.css');
 
 :root {
   --max-width: 1300px;
@@ -61,6 +60,18 @@ body {
   background-color: var(--orange);
 }
 
+h2 {
+  color: black;
+  font-size: var(--h2-font-size);
+  font-weight: bolder;
+  margin-bottom: var(--section-margin);
+}
+
+footer {
+  text-align: left;
+  margin-top: 1rem;
+}
+
 hr {
   width: 50%;
   border: 1px solid #7c7c7c;
@@ -80,24 +91,13 @@ hr {
   cursor: pointer;
 }
 
-h2 {
-  color: black;
-  font-size: var(--h2-font-size);
-  font-weight: bolder;
-  margin-bottom: var(--section-margin);
-}
-
-footer {
-  text-align: left;
-  margin-top: 1rem;
-}
-
 .site-title {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
+/* Search form */
 .search-form {
   display: flex;
   align-items: center;
@@ -108,92 +108,66 @@ footer {
   margin-right: 1rem;
   border: 1px solid #ccc;
   font-size: var(--search-form-font-size);
+  width: 280px;
+  transition: width 0.3s ease-in-out, margin-left 0.3s ease-in-out;
+}
+
+.search-form input:hover {
+  width: 330px;
+  margin-left: -50px;
 }
 
 .search-form button {
   font-size: var(--search-form-font-size);
 }
 
-#statistics {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+/* Media queries */
+@media (max-width: 1235px) {
+  .main-container {
+    width: 95%;
+  }
 }
 
-th {
-  position: relative;
-  color: #797982;
-  border-bottom: 1px solid gray;
-  padding: 1rem;
+@media (max-width: 800px) {
+  .main-container {
+    width: 100%;
+    padding: var(--container-top-padding) 1rem;
+  }
 }
 
-th:hover {
-  background-color: #fafafa;
-  cursor: pointer;
+@media (max-width: 995px) {
+  .site-title {
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .search-form {
+    margin-top: 0.8rem;
+  }
 }
 
-th::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 1px;
-  background-color: gray;
+@media (max-width: 520px) {
+  .search-form input {
+    font-size: 1rem;
+    width: 240px;
+  }
+
+  .search-form input:hover {
+    width: 250px;
+    margin-left: -10px;
+  }
+
+  .search-form button {
+    font-size: 1rem;
+    /*padding: 1rem;*/
+  }
 }
 
-th:hover::before {
-  height: 4px;
-}
-
-th:hover::after {
-  content: '↓';
-  color: darkcyan;
-  margin-left: 10px;
-  position: absolute;
-  right: 10px; /* Adjust to position the arrow correctly */
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-td {
-  color: #797982;
-  font-size: inherit;
-  padding: 0.5rem;
-}
-
-tr:nth-child(odd):not(:first-child) {
-  background-color: #faf5fb;
-}
-
-tr:hover:not(:first-child) {
-  background: var(--orange);
-}
-
-tr:hover:not(:first-child) td {
-  color: white;
-}
-
-th:first-child,
-td:first-child {
-  text-align: left;
-}
-
-.pagination {
-  display: flex;
-  margin: 1rem 1rem 0 1rem;
-}
-
-.pagination a,
-.pagination span {
-  padding-right: 1rem;
-}
-
-.page-link {
-  color: darkcyan;
-  text-decoration: none;
-}
-
-.page-link:hover {
-  color: #797982;
+@media (max-width: 910px) {
+  hr {
+    width: 90%;
+  }
+  footer p {
+    padding: 0 1.1rem;
+  }
 }
