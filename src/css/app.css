@@ -69,7 +69,10 @@ h2 {
 
 footer {
   text-align: left;
-  margin-top: 1rem;
+  margin-top: 2rem;
+}
+footer div:not(:first-child) {
+  margin-top: 2rem;
 }
 
 hr {
@@ -159,7 +162,6 @@ hr {
 
   .search-form button {
     font-size: 1rem;
-    /*padding: 1rem;*/
   }
 }
 
@@ -167,7 +169,31 @@ hr {
   hr {
     width: 90%;
   }
-  footer p {
-    padding: 0 1.1rem;
+}
+
+@media (max-width: 600px) {
+  .float-left {
+    float: left;
+    width: 48%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  .float-right {
+    float: right;
+    width: 48%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  .last-paragraph {
+    padding-top: 2rem;
+    clear: both;
+  }
+
+  footer div:not(:first-child) {
+    margin-top: 0;
   }
 }
