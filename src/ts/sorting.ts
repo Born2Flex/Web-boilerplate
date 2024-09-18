@@ -1,4 +1,3 @@
-// @ts-ignore
 import {FormattedUser} from './interfaces';
 
 type SortingField = 'full_name' | 'age' | 'b_day' | 'country';
@@ -40,8 +39,8 @@ function sortUsersByNumField(users: FormattedUser[], field: SortingField, order:
 
 function sortUsersByDateField(users: FormattedUser[], field: SortingField, order: Order = 'asc'): FormattedUser[] {
     return users.sort((a, b) => {
-        const fieldA = new Date(a[field] as string) as Date;
-        const fieldB = new Date(b[field] as string) as Date;
+        const fieldA = new Date(a[field] as string);
+        const fieldB = new Date(b[field] as string);
         return order === 'asc' ? fieldA.getTime() - fieldB.getTime() : fieldB.getTime() - fieldA.getTime();
     });
 }

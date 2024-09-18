@@ -1,18 +1,14 @@
 import {randomUserMock, additionalUsers} from './FE4U-Lab2-mock';
-// @ts-ignore
-import {formatUsersAndAddFields, mergeUsers} from './user-formatting';
-// @ts-ignore
+import {addFieldsToUsers, formatUsersAndAddFields, mergeUsers} from './user-formatting';
 import {validateUser} from './validation';
-// @ts-ignore
 import {FilterParams, filterUsers} from "./filtering";
-// @ts-ignore
 import {sortUsers} from './sorting';
-// @ts-ignore
 import {findUserByParam} from './search';
-import {FormattedUser} from './interfaces';
 
 // task1
-const formattedUsers = mergeUsers(formatUsersAndAddFields(randomUserMock), additionalUsers as FormattedUser[]);
+const formattedUsers = mergeUsers(formatUsersAndAddFields(randomUserMock), addFieldsToUsers(additionalUsers));
+
+console.log(formatUsersAndAddFields(randomUserMock))
 // console.log(formattedUsers);
 // console.log(formattedUsers.length);
 

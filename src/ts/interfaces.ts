@@ -1,4 +1,4 @@
-export type Gender = "male" | "female";
+export type Gender = "Male" | "Female";
 
 export type Title = "Mr" | "Ms" | "Miss" | "Mrs" | "Monsieur" | "Madame"; // string?
 
@@ -12,9 +12,9 @@ export const courses: Course[] = [
 export interface FormattedUser {
     id: string,
     favorite: boolean,
-    course: Course | null,
+    course: Course,
     bg_color: string,
-    note: string | null,
+    note: string,
 
     gender: Gender,
     title: Title,

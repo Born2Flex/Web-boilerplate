@@ -1,12 +1,10 @@
-// @ts-ignore
 import {FormattedUser} from './interfaces';
-
 
 export function validateUser(user: FormattedUser): boolean {
     let isValid = true;
     isValid &&= validateStringField(user.full_name);
-    // isValid &&= validateStringField(user.gender);
-    // isValid &&= validateStringField(user.note);
+    isValid &&= validateStringField(user.gender);
+    isValid &&= validateStringField(user.note);
     isValid &&= validateStringField(user.state);
     isValid &&= validateStringField(user.city);
     isValid &&= validateStringField(user.country);
@@ -28,7 +26,7 @@ function validateNumField(field: any): boolean {
 
 // TODO add phone num check
 function validatePhoneNum(phoneNum: any): boolean {
-    return typeof phoneNum === 'string'
+    return typeof phoneNum === 'string';
 }
 
 function validateEmail(email: any): boolean {

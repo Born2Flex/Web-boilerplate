@@ -1,21 +1,38 @@
-// @ts-ignore
-import {FormattedUser, courses, Course} from './interfaces';
+import {FormattedUser, Gender} from './interfaces';
+import {capitalizeWord, generateId, getRandomCourse} from './utils';
 
 export function mergeUsers(users: FormattedUser[], additionalUsers: FormattedUser[]): FormattedUser[] {
     return getDistinctUsers(users.concat(additionalUsers));
 }
 
 function getDistinctUsers(users: FormattedUser[]): FormattedUser[] {
-    return users.filter((item, index, self) => index === self.findIndex((t) => t.full_name === item.full_name));
+    return users.filter((item, index, self) =>
+        index === self.findIndex((t) => t.email === item.email)
+    );
 }
 
 export function formatUsersAndAddFields(users: any[]): FormattedUser[] {
     return users.map(user => addMissingFields(formatUser(user)));
 }
 
-function formatUser(user: any) {
+export function addFieldsToUsers(users: any[]): FormattedUser[] {
+    return users.map(user => addMissingFields(user));
+}
+
+function addMissingFields(user: any): FormattedUser {
     return {
-        gender: user.gender,
+        ...user,
+        id: user.id || generateId(13),
+        favorite: user.favorite || false,
+        course: user.course || getRandomCourse(),
+        bg_color: user.bg_color || "#ffffff",
+        note: user.note || "Note",
+    };
+}
+
+function formatUser(user: any): Partial<FormattedUser> {
+    return {
+        gender: capitalizeWord(user.gender) as Gender,
         title: user.name.title,
         full_name: user.name.first + ' ' + user.name.last,
         city: user.location.city,
@@ -31,29 +48,4 @@ function formatUser(user: any) {
         picture_large: user.picture.large,
         picture_thumbnail: user.picture.thumbnail
     };
-}
-
-function addMissingFields(user: any): FormattedUser {
-    return {
-        id: generateId(13),
-        favorite: false,
-        course: getRandomCourse(),
-        bg_color: "#ffffff",
-        note: null,
-        ...user,
-    };
-}
-
-function generateId(length: number): string {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    let id = '';
-    for (let i = 0; i < length; i++) {
-        const randomIndex = Math.floor(Math.random() * characters.length);
-        id += characters[randomIndex];
-    }
-    return id;
-}
-
-function getRandomCourse(): Course {
-    return courses[Math.floor(Math.random() * courses.length)];
 }

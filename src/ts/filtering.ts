@@ -1,5 +1,4 @@
-// @ts-ignore
-import {FormattedUser, Gender} from "./interfaces";
+import {FormattedUser, Gender} from './interfaces';
 
 export interface FilterParams {
     country?: string;
