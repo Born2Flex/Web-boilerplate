@@ -4,16 +4,16 @@ export function findUsersByParam(users: FormattedUser[], param: any): FormattedU
     const ageComparisonRegex = /^(<=|>=|<|>|=)\s*(\d+)$/;
     const match = param.match(ageComparisonRegex);
     if (match) {
-        return searchByAge(users, match);
+        return findByAge(users, match);
     }
     return users.filter(user =>
-        user.full_name.includes(param) ||
-        user.note?.includes(param) ||
+        user.full_name.toLowerCase().includes(param.toLowerCase()) ||
+        user.note?.toLowerCase().includes(param.toLowerCase()) ||
         user.age === Number(param)
     );
 }
 
-function searchByAge(users: FormattedUser[], match: string[]) {
+function findByAge(users: FormattedUser[], match: string[]) {
     const operator = match[1];
     const num = Number(match[2]);
     const predicate = getPredicate(operator);

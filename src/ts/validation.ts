@@ -32,8 +32,8 @@ function validateNumField(field: any): boolean {
 function validatePhoneNum(phoneNum: any, country: any): boolean {
     if (typeof phoneNum === 'string' && typeof country === 'string') {
         const countryCode = getCountryCode(country);
-        console.log(countryCode);
-        console.log(phoneNum + " " + isValidPhoneNumber(phoneNum, countryCode as CountryCode))
+        // console.log(countryCode);
+        // console.log(phoneNum + " " + isValidPhoneNumber(phoneNum, countryCode as CountryCode))
         return isValidPhoneNumber(phoneNum, countryCode as CountryCode);
     }
     return false;
