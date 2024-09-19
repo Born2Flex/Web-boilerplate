@@ -1,21 +1,20 @@
 import {randomUserMock, additionalUsers} from './FE4U-Lab2-mock';
 import {addFieldsToUsers, formatUsersAndAddFields, mergeUsers} from './user-formatting';
-import {validateUser} from './validation';
+import {validateUsers} from './validation';
 import {FilterParams, filterUsers} from "./filtering";
 import {sortUsers} from './sorting';
-import {findUserByParam} from './search';
 
 // task1
 const formattedUsers = mergeUsers(formatUsersAndAddFields(randomUserMock), addFieldsToUsers(additionalUsers));
 
-console.log(formatUsersAndAddFields(randomUserMock))
+// console.log(formatUsersAndAddFields(randomUserMock))
 // console.log(formattedUsers);
-// console.log(formattedUsers.length);
+console.log(formattedUsers.length);
 
 // task2
-const validatedUsers= formattedUsers.filter((user, i, self) => validateUser(user));
+const validatedUsers= validateUsers(formattedUsers);
 // console.log(formattedUsers)
-// console.log(validatedUsers.length)
+console.log(validatedUsers.length)
 
 // task3
 const filters: FilterParams = {
@@ -35,6 +34,6 @@ const sortedUsers = sortUsers(formattedUsers, 'b_day', 'desc');
 
 //task5
 
-console.log(findUserByParam(formattedUsers, '35'));
+// console.log(findUsersByParam(formattedUsers, '35'));
 
 //task6

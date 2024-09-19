@@ -1,6 +1,12 @@
 import {FormattedUser} from './interfaces';
+import { getCountryCode } from 'countries-list'
+import {CountryCode, isValidPhoneNumber} from "libphonenumber-js";
 
-export function validateUser(user: FormattedUser): boolean {
+export function validateUsers(users: FormattedUser[]) {
+    return users.filter(user => validateUser(user));
+}
+
+function validateUser(user: FormattedUser): boolean {
     let isValid = true;
     isValid &&= validateStringField(user.full_name);
     isValid &&= validateStringField(user.gender);
@@ -10,9 +16,8 @@ export function validateUser(user: FormattedUser): boolean {
     isValid &&= validateStringField(user.country);
 
     isValid &&= validateNumField(user.age);
-    isValid &&= validatePhoneNum(user.phone);
+    isValid &&= validatePhoneNum(user.phone, user.country);
     isValid &&= validateEmail(user.email);
-
     return isValid;
 }
 
@@ -24,9 +29,14 @@ function validateNumField(field: any): boolean {
     return typeof field === 'number';
 }
 
-// TODO add phone num check
-function validatePhoneNum(phoneNum: any): boolean {
-    return typeof phoneNum === 'string';
+function validatePhoneNum(phoneNum: any, country: any): boolean {
+    if (typeof phoneNum === 'string' && typeof country === 'string') {
+        const countryCode = getCountryCode(country);
+        console.log(countryCode);
+        console.log(phoneNum + " " + isValidPhoneNumber(phoneNum, countryCode as CountryCode))
+        return isValidPhoneNumber(phoneNum, countryCode as CountryCode);
+    }
+    return false;
 }
 
 function validateEmail(email: any): boolean {

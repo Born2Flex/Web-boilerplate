@@ -7,7 +7,7 @@ export function mergeUsers(users: FormattedUser[], additionalUsers: FormattedUse
 
 function getDistinctUsers(users: FormattedUser[]): FormattedUser[] {
     return users.filter((item, index, self) =>
-        index === self.findIndex((t) => t.email === item.email)
+        index === self.findIndex(t => t.email === item.email)
     );
 }
 

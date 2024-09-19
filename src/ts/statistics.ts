@@ -1,6 +1,6 @@
 import {FormattedUser} from './interfaces';
+import {findUsersByParam} from "./search";
 
-function calcPercent(users: FormattedUser[], predicate: (user: FormattedUser) => Boolean) {
-    const result = users.filter(user => predicate(user));
-    return (result.length / users.length) * 100;
+export function calcPercent(users: FormattedUser[], param: any) {
+    return (findUsersByParam(users, param).length / users.length) * 100;
 }
