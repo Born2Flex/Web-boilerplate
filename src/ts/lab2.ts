@@ -28,10 +28,11 @@ console.log(`Num of validated users: ${validatedUsers.length}\n`);
 // task3
 
 const filters: FilterParams = {
-    country: 'France',
+    // country: 'France',
     gender: "Male",
-    // age: 55,
-    favorite: false,
+    // age: ">= 35",
+    // age: "55",
+    // favorite: false,
 };
 
 const filteredUsers = filterUsers(validatedUsers, filters);

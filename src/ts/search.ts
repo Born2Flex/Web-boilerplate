@@ -20,7 +20,7 @@ function findByAge(users: FormattedUser[], match: string[]) {
     return users.filter(user => predicate(user.age ?? 0, num));
 }
 
-function getPredicate(operator: string): (a: number, b: number) => boolean {
+export function getPredicate(operator: string): (a: number, b: number) => boolean {
     switch (operator) {
         case '>': return (a, b) => a > b;
         case '>=': return (a, b) => a >= b;
