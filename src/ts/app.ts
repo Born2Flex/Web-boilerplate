@@ -1,30 +1,29 @@
-console.log("Hello world!");
-
+import './scroll'
 import '../css/app.css';
 
-
+console.log(`Hello world!`);
 
 const addTeacherBtn = document.querySelectorAll('.add-teacher');
-const addTeacherPopup = document.querySelector('#add-teacher') as HTMLElement;
+const addTeacherPopup = document.querySelector('#add-teacher') as HTMLDialogElement;
 const addTeacherCloseBtn = document.querySelector('#add-close-btn') as HTMLElement;
 const teacherInfoCloseBtn = document.querySelector('#info-close-btn') as HTMLElement;
 
 const teachersImages = document.querySelectorAll('.teacher-image');
-const teacherInfoPopup = document.querySelector('#teacher-info') as HTMLElement;
+const teacherInfoPopup = document.querySelector('#teacher-info') as HTMLDialogElement;
 
 
 addTeacherBtn.forEach(btn => btn.addEventListener('click', () => {
-    addTeacherPopup.classList.add('visible');
-}));
-
-teachersImages.forEach(teacher => teacher.addEventListener('click', () => {
-    teacherInfoPopup.classList.add('visible');
+    addTeacherPopup.showModal();
 }));
 
 addTeacherCloseBtn.addEventListener('click', () => {
-    addTeacherPopup.classList.remove('visible');
+    addTeacherPopup.close();
 });
 
+teachersImages.forEach(teacher => teacher.addEventListener('click', () => {
+    teacherInfoPopup.showModal();
+}));
+
 teacherInfoCloseBtn.addEventListener('click', () => {
-    teacherInfoPopup.classList.remove('visible');
+    teacherInfoPopup.close();
 });

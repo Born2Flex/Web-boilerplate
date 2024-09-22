@@ -71,6 +71,7 @@ footer {
   text-align: left;
   margin-top: 2rem;
 }
+
 footer div:not(:first-child) {
   margin-top: 2rem;
 }
