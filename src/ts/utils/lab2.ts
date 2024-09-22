@@ -1,4 +1,4 @@
-import {randomUserMock, additionalUsers} from './FE4U-Lab2-mock';
+import {randomUserMock, additionalUsers} from '../FE4U-Lab2-mock';
 import {addFieldsToUsers, formatUsersAndAddFields, mergeUsers} from './user-formatting';
 import {validateUsers} from './validation';
 import {FilterParams, filterUsers} from "./filtering";

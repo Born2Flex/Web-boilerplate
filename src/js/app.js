@@ -11,22 +11,22 @@ const rightBtn = document.querySelector('.scroll-btn.right');
 
 const addTeacherBtn = document.querySelectorAll('.add-teacher');
 const addTeacherPopup = document.querySelector('#add-teacher');
-const addTeacherCloseBtn = document.querySelector('#add-close-btn')
-const teacherInfoCloseBtn = document.querySelector('#info-close-btn')
+const addTeacherCloseBtn = document.querySelector('#add-close-btn');
+const teacherInfoCloseBtn = document.querySelector('#info-close-btn');
 
-const teachersImages = document.querySelectorAll('.teacher-image')
+const teachersImages = document.querySelectorAll('.teacher-image');
 const teacherInfoPopup = document.querySelector('#teacher-info');
 
 leftBtn.addEventListener('click', () => {
   if (window.innerWidth > 600) {
     scrollContainer.scrollBy({
       left: -200,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
   } else {
     scrollContainer.scrollBy({
       left: -282,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
   }
 });
@@ -35,21 +35,21 @@ rightBtn.addEventListener('click', () => {
   if (window.innerWidth > 600) {
     scrollContainer.scrollBy({
       left: 200,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
   } else {
     scrollContainer.scrollBy({
       left: 282,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
   }
 });
 
-addTeacherBtn.forEach(btn => btn.addEventListener('click', () => {
+addTeacherBtn.forEach((btn) => btn.addEventListener('click', () => {
   addTeacherPopup.classList.add('visible');
 }));
 
-teachersImages.forEach(teacher => teacher.addEventListener('click', () => {
+teachersImages.forEach((teacher) => teacher.addEventListener('click', () => {
   teacherInfoPopup.classList.add('visible');
 }));
 
