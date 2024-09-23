@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
-    "module": "es6",
+    "module": "ES6",
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "target": "es6",
+    "target": "ES6",
     "sourceMap": true,
     "outDir": "./build/js",
     "incremental": true,
@@ -15,7 +15,8 @@
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
     "moduleResolution": "node",
-    "composite": true
+    "composite": true,
+    "lib": ["DOM", "ES6", "DOM.Iterable", "ScriptHost", "ES2016.Array.Include"],
   },
   "include": ["./src/**/*", ".eslintrc.cjs"],
   "exclude": ["./node_modules", "test", "./build/js"]
