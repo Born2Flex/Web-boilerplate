@@ -1,5 +1,7 @@
-import './scroll'
+import './task1';
+import './scroll';
 import '../css/app.css';
+
 
 console.log(`Hello world!`);
 
