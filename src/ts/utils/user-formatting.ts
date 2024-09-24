@@ -46,6 +46,7 @@ function formatUser(user: any): Partial<FormattedUser> {
         age: user.dob.age,
         phone: user.phone,
         picture_large: user.picture.large,
-        picture_thumbnail: user.picture.thumbnail
+        picture_thumbnail: user.picture.thumbnail,
+        favorite: user.favorite || false
     };
 }

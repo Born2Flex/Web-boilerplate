@@ -1,42 +1,91 @@
-import {randomUserMock, additionalUsers} from './FE4U-Lab2-mock';
-import {addFieldsToUsers, formatUsersAndAddFields, mergeUsers} from './utils/user-formatting';
-import {FormattedUser} from './utils/interfaces';
-import {validateUsers} from "./utils/validation";
+import {findTeacherById, formatShortTeacherCard, formatTeacherCard} from "./user-card/teacher-card";
+import {FormattedUser} from "./utils/interfaces";
+import {validatedUsers} from "./data";
 
-const teacherContainer = document.querySelector(".all-teachers");
-const mergedUsers = mergeUsers(formatUsersAndAddFields(randomUserMock), addFieldsToUsers(additionalUsers));
-const validatedUsers = validateUsers(mergedUsers);
+const teacherGrid = document.querySelector('.all-teachers');
+const teacherScroll = document.querySelector('.scroll');
 
-addTeachers();
+export function addTeachersOnPage() {
+    addAllTeachersOnGrid();
+    addFavTeachersOnScroll();
+}
 
-function addTeachers() {
+function addAllTeachersOnGrid() {
     let html = '';
     validatedUsers.forEach(user => {
-        html += formatUserCard(user);
+        html += formatTeacherCard(user);
     })
-    teacherContainer.innerHTML = html;
+    teacherGrid.innerHTML = html;
 }
 
-function formatUserCard(user: FormattedUser) {
-    let image: string;
-    if (user.picture_large) {
-        image = `<img src=${user.picture_large} alt="picture"/>`;
-    } else {
-        image = `<span class="teacher-initials">${getInitials(user.full_name)}</span>`;
+function addFavTeachersOnScroll() {
+    let html = '';
+    validatedUsers.filter(user => user.favorite)
+        .forEach(user => {
+            html += formatShortTeacherCard(user);
+        })
+    teacherScroll.innerHTML = html;
+}
+
+// Teacher info popup
+
+const teacherInfoCloseBtn = document.querySelector<HTMLElement>('#info-close-btn');
+const teacherInfoPopup = document.querySelector<HTMLDialogElement>('#teacher-info');
+
+function addShowPopupEvent(element: Element) {
+    element.addEventListener('click', event => {
+        const card = (event.target as HTMLElement).closest('.card');
+        if (!card) return;
+
+        const userID = card.getAttribute('data-user-id');
+        updateTeacherInfoPopup(findTeacherById(userID));
+        teacherInfoPopup.showModal();
+    });
+}
+
+addShowPopupEvent(teacherGrid);
+addShowPopupEvent(teacherScroll);
+
+teacherInfoCloseBtn.addEventListener('click', () => {
+    teacherInfoPopup.close();
+});
+
+function updateTeacherInfoPopup(user: FormattedUser) {
+    const teacherInfoElem = document.querySelector<HTMLElement>('.main-teacher-info');
+    teacherInfoElem.setAttribute('data-user-id', user.id);
+
+    const teacherImage = teacherInfoElem.children[0];
+    teacherImage.children[0].setAttribute("src", user.picture_large);
+
+    const teacherInfo = teacherInfoElem.children[1].children as HTMLCollection;
+    updateElementText(teacherInfo[0], user.full_name);
+    updateElementText(teacherInfo[1], user.course);
+    updateElementText(teacherInfo[2], `${user.city}, ${user.country}`);
+    updateElementText(teacherInfo[3], `${user.age}, ${user.gender}`);
+    updateElementText(teacherInfo[4], user.email);
+    updateElementText(teacherInfo[5], user.phone);
+    updateElementText(teacherInfo[6], user.favorite ? '★' : '☆');
+
+    document.querySelector<HTMLElement>('.description').innerText = user.note;
+}
+
+function updateElementText(element: Element | undefined, text: string) {
+    if (element) {
+        (element as HTMLElement).innerText = text;
     }
-    return `
-        <div class="card">
-            <div class="teacher-image">${image}</div>
-            <div class="teacher-info">
-                <h3 class="teacher-name">${user.full_name}</h3>
-                <p class="teacher-specialty">${user.course}</p>
-                <p class="teacher-country">${user.country}</p>
-            </div>
-        </div>
-    `;
 }
 
-function getInitials(fullName: string) {
-    const parts = fullName.split(' ');
-    return `${parts[0].charAt(0).toLocaleUpperCase()}.${parts[1].charAt(0).toLocaleUpperCase()}.`;
-}
+// Favorite Btn
+
+const favoriteBtn = document.querySelector(".favorite-btn") as HTMLElement;
+
+favoriteBtn.addEventListener('click', event => {
+    const teacherInfoElem = (event.target as HTMLElement).closest<HTMLElement>('.main-teacher-info');
+    const userID = teacherInfoElem.getAttribute('data-user-id');
+    const user = findTeacherById(userID);
+    user.favorite = !user.favorite;
+    favoriteBtn.innerText = favoriteBtn.innerText === '☆'? '★' : '☆';
+    addTeachersOnPage();
+    console.log(1)
+});
+

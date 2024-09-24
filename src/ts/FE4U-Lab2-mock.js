@@ -66,6 +66,7 @@ export const randomUserMock = [
       thumbnail: 'https://randomuser.me/api/portraits/thumb/men/40.jpg',
     },
     nat: 'IE',
+    favorite: true,
   },
   {
     gender: 'male',
@@ -174,6 +175,7 @@ export const randomUserMock = [
       thumbnail: 'https://randomuser.me/api/portraits/thumb/men/34.jpg',
     },
     nat: 'FI',
+    favorite: true,
   },
   {
     gender: 'female',
@@ -245,6 +247,7 @@ export const randomUserMock = [
       thumbnail: 'https://randomuser.me/api/portraits/thumb/women/94.jpg',
     },
     nat: 'AU',
+    favorite: true,
   },
   {
     gender: 'female',
@@ -470,7 +473,7 @@ export const randomUserMock = [
   },
   {
     gender: 'male',
-    name: { title: 'Mr', first: 'August', last: 'Bertheussen' },
+    name: { title: 'Mr', first: 'August', last: 'Bertusen' },
     location: {
       street: { number: 2984, name: 'Granittveien' },
       city: 'Arendal',
@@ -834,6 +837,7 @@ export const randomUserMock = [
       thumbnail: 'https://randomuser.me/api/portraits/thumb/men/20.jpg',
     },
     nat: 'FR',
+    favorite: true,
   },
   {
     gender: 'male',
@@ -1300,6 +1304,7 @@ export const randomUserMock = [
       thumbnail: 'https://randomuser.me/api/portraits/thumb/women/53.jpg',
     },
     nat: 'CH',
+    favorite: true,
   },
   {
     gender: 'female',
