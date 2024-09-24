@@ -2,6 +2,7 @@ import {findTeacherById, formatShortTeacherCard, formatTeacherCard} from "./user
 import {FormattedUser} from "./utils/interfaces";
 import {validatedUsers} from "./data";
 import {clearFilters} from "./task2";
+import {addTeachersInTable} from "./task3";
 
 const teacherGrid = document.querySelector('.all-teachers');
 const teacherScroll = document.querySelector('.scroll');
@@ -12,6 +13,7 @@ export function addTeachersOnPage(teachers: FormattedUser[]) {
     teachers.forEach(user => list.push(user.country));
     console.log(list)
     addFavTeachersOnScroll(teachers);
+    addTeachersInTable(teachers);
 }
 
 export function addAllTeachersOnGrid(teachers: FormattedUser[]) {

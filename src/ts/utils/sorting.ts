@@ -1,7 +1,7 @@
 import {FormattedUser} from './interfaces';
 
-type SortingField = 'full_name' | 'age' | 'b_day' | 'country';
-type Order = 'asc' | 'desc';
+type SortingField = 'full_name' | 'gender' | 'course' | 'age' | 'b_day' | 'country';
+export type Order = 'asc' | 'desc';
 
 export function sortUsers(users: FormattedUser[], field: SortingField, order: Order = 'asc'): FormattedUser[] {
     if (isStringField(field)) {
@@ -14,7 +14,7 @@ export function sortUsers(users: FormattedUser[], field: SortingField, order: Or
 }
 
 function isStringField(field: string): boolean {
-    return field === 'full_name' || field === 'country';
+    return field === 'full_name' || field === 'country' || field === 'course' || field === 'gender';
 }
 
 function isNumField(field: string): boolean {
@@ -41,6 +41,6 @@ function sortUsersByDateField(users: FormattedUser[], field: SortingField, order
     return users.sort((a, b) => {
         const fieldA = new Date(a[field] as string);
         const fieldB = new Date(b[field] as string);
-        return order === 'asc' ? fieldA.getTime() - fieldB.getTime() : fieldB.getTime() - fieldA.getTime();
+        return order === 'asc' ? fieldB.getTime() - fieldA.getTime() : fieldA.getTime() - fieldB.getTime();
     });
 }
