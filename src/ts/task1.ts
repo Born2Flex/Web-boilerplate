@@ -1,26 +1,30 @@
 import {findTeacherById, formatShortTeacherCard, formatTeacherCard} from "./user-card/teacher-card";
 import {FormattedUser} from "./utils/interfaces";
 import {validatedUsers} from "./data";
+import {clearFilters} from "./task2";
 
 const teacherGrid = document.querySelector('.all-teachers');
 const teacherScroll = document.querySelector('.scroll');
 
-export function addTeachersOnPage() {
-    addAllTeachersOnGrid();
-    addFavTeachersOnScroll();
+export function addTeachersOnPage(teachers: FormattedUser[]) {
+    addAllTeachersOnGrid(teachers);
+    const list = [];
+    teachers.forEach(user => list.push(user.country));
+    console.log(list)
+    addFavTeachersOnScroll(teachers);
 }
 
-function addAllTeachersOnGrid() {
+export function addAllTeachersOnGrid(teachers: FormattedUser[]) {
     let html = '';
-    validatedUsers.forEach(user => {
+    teachers.forEach(user => {
         html += formatTeacherCard(user);
     })
     teacherGrid.innerHTML = html;
 }
 
-function addFavTeachersOnScroll() {
+function addFavTeachersOnScroll(teachers: FormattedUser[]) {
     let html = '';
-    validatedUsers.filter(user => user.favorite)
+    teachers.filter(user => user.favorite)
         .forEach(user => {
             html += formatShortTeacherCard(user);
         })
@@ -85,7 +89,8 @@ favoriteBtn.addEventListener('click', event => {
     const user = findTeacherById(userID);
     user.favorite = !user.favorite;
     favoriteBtn.innerText = favoriteBtn.innerText === '☆'? '★' : '☆';
-    addTeachersOnPage();
+    addTeachersOnPage(validatedUsers);
+    clearFilters();
     console.log(1)
 });
 
