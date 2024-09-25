@@ -41,6 +41,6 @@ function sortUsersByDateField(users: FormattedUser[], field: SortingField, order
     return users.sort((a, b) => {
         const fieldA = new Date(a[field] as string);
         const fieldB = new Date(b[field] as string);
-        return order === 'asc' ? fieldB.getTime() - fieldA.getTime() : fieldA.getTime() - fieldB.getTime();
+        return order === 'asc' ? fieldA.getTime() - fieldB.getTime() : fieldB.getTime() - fieldA.getTime();
     });
 }
