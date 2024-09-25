@@ -9,9 +9,6 @@ const teacherScroll = document.querySelector('.scroll');
 
 export function addTeachersOnPage(teachers: FormattedUser[]) {
     addAllTeachersOnGrid(teachers);
-    const list = [];
-    teachers.forEach(user => list.push(user.country));
-    console.log(list)
     addFavTeachersOnScroll(teachers);
     addTeachersInTable(teachers);
 }
@@ -61,7 +58,7 @@ function updateTeacherInfoPopup(user: FormattedUser) {
     teacherInfoElem.setAttribute('data-user-id', user.id);
 
     const teacherImage = teacherInfoElem.children[0];
-    teacherImage.children[0].setAttribute("src", user.picture_large);
+    teacherImage.children[0].setAttribute("src", user.picture_large?? '../images/photo.jpg');
 
     const teacherInfo = teacherInfoElem.children[1].children as HTMLCollection;
     updateElementText(teacherInfo[0], user.full_name);
@@ -93,6 +90,5 @@ favoriteBtn.addEventListener('click', event => {
     favoriteBtn.innerText = favoriteBtn.innerText === '☆'? '★' : '☆';
     addTeachersOnPage(validatedUsers);
     clearFilters();
-    console.log(1)
 });
 

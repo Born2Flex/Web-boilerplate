@@ -4,14 +4,14 @@ import {validatedUsers} from "./data";
 import {clearFilters} from "./task2";
 
 const searchInput = document.querySelector<HTMLInputElement>('#search-input')
-const searchBtn = document.querySelector('#search-btn');
+const searchForm = document.querySelector<HTMLFormElement>('.search-form');
+
+searchForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    clearFilters();
+    addAllTeachersOnGrid(findUsersByParam(validatedUsers, searchInput.value.trim()));
+});
 
 export function clearSearchInput() {
     searchInput.value = '';
 }
-
-searchBtn.addEventListener('click', () => {
-    const searchValue = searchInput.value.trim();
-    clearFilters();
-    addAllTeachersOnGrid(findUsersByParam(validatedUsers, searchValue));
-})

@@ -17,7 +17,7 @@
             <h1 id="logo">Teachinder</h1>
             <form class="search-form">
                 <input id="search-input" type="text" placeholder="Name, note or age to search"/>
-                <button id="search-btn" class="main-btn" type="button">Search</button>
+                <button id="search-btn" class="main-btn" type="submit">Search</button>
             </form>
         </section>
         <nav class="navigation" aria-label="site navigation">
@@ -365,12 +365,12 @@
         <form id="add-teacher-form">
             <div class="form-field">
                 <label for="name">Name</label>
-                <input id="name" type="text"/>
+                <input id="name" name="full_name" type="text" pattern="\w+ \w+" required/>
             </div>
 
             <div class="form-field">
                 <label for="specialty">Specialty</label>
-                <select id="specialty">
+                <select id="specialty" name="course" required>
                     <option value="Mathematics">Mathematics</option>
                     <option value="Physics">Physics</option>
                     <option value="Chemistry">Chemistry</option>
@@ -382,7 +382,7 @@
             <div class="field-group">
                 <div class="form-field">
                     <label for="country">Country</label>
-                    <select id="country">
+                    <select id="country" name="country" required>
                         <option value="Ukraine">Ukraine</option>
                         <option value="Poland">Poland</option>
                         <option value="Belgium">Belgium</option>
@@ -392,39 +392,39 @@
                 </div>
                 <div class="form-field">
                     <label for="city">City</label>
-                    <input id="city" type="text"/>
+                    <input id="city" name="city" type="text" required/>
                 </div>
             </div>
             <div class="field-group">
                 <div class="form-field">
                     <label for="email">Email</label>
-                    <input id="email" type="email"/>
+                    <input id="email" name="email" type="email" pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" required/>
                 </div>
                 <div class="form-field">
                     <label for="phone">Phone</label>
-                    <input id="phone" type="text"/>
+                    <input id="phone" name="phone" type="text" pattern="\d{3}\s?\d{3}\s?\d{4}" required/>
                 </div>
             </div>
             <div class="form-field">
                 <label for="date">Date of birth</label>
-                <input id="date" type="date" />
+                <input id="date" name="b_day" type="date" required/>
             </div>
             <div class="form-field-horizontal">
                 <label for="sex">Sex</label>
 
                 <label for="male">Male</label>
-                <input type="radio" id="male" name="contact" value="male" />
+                <input type="radio" id="male" name="gender" value="male" required/>
 
                 <label for="female">Female</label>
-                <input type="radio" id="female" name="contact" value="female" />
+                <input type="radio" id="female" name="gender" value="female" required/>
             </div>
             <div class="form-field-horizontal color-picker">
                 <label for="color">Background color</label>
-                <input id="color" type="color">
+                <input id="color" name="bg_color" type="color" required>
             </div>
             <div class="form-field">
                 <label for="notes">Notes (optional)</label>
-                <textarea id="notes"></textarea>
+                <textarea id="notes" name="note" required></textarea>
             </div>
             <button id="form-submit-btn" class="main-btn">Add</button>
         </form>
