@@ -1,6 +1,7 @@
 import {FilterParams, filterUsers} from "./utils/filtering";
 import {addAllTeachersOnGrid} from "./task1";
 import {validatedUsers} from "./data";
+import {clearSearchInput} from "./task4";
 
 const age = document.querySelector<HTMLSelectElement>('#age');
 const region = document.querySelector<HTMLSelectElement>('#region');
@@ -29,6 +30,7 @@ function addSelectFilterEvent(element: HTMLSelectElement | HTMLInputElement, fie
         if (filters[field] === '') {
             delete filters[field];
         }
+        clearSearchInput();
         addAllTeachersOnGrid(filterUsers(validatedUsers, filters));
     });
 }
