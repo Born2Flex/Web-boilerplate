@@ -1159,6 +1159,7 @@ export const randomUserMock = [
       thumbnail: 'https://randomuser.me/api/portraits/thumb/men/36.jpg',
     },
     nat: 'IE',
+    favorite: true
   },
   {
     gender: 'male',
@@ -1447,6 +1448,7 @@ export const randomUserMock = [
       thumbnail: 'https://randomuser.me/api/portraits/thumb/women/69.jpg',
     },
     nat: 'US',
+    favorite: true,
   },
   {
     gender: 'female',
