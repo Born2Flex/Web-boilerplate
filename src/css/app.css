@@ -22,6 +22,7 @@
   --orange: #f85e60;
   --light-orange: #f79686;
   --light-gray: #aaacb7;
+  --star-yellow: #e8ea04;
   --logo-font-size: 3.6rem;
   --h2-font-size: 2.2rem;
   --text-font-size: 1.2rem;
@@ -71,6 +72,7 @@ footer {
   text-align: left;
   margin-top: 2rem;
 }
+
 footer div:not(:first-child) {
   margin-top: 2rem;
 }
@@ -115,7 +117,8 @@ hr {
   transition: width 0.3s ease-in-out, margin-left 0.3s ease-in-out;
 }
 
-.search-form input:hover {
+.search-form input:hover,
+.search-form input:focus {
   width: 330px;
   margin-left: -50px;
 }
@@ -155,7 +158,8 @@ hr {
     width: 240px;
   }
 
-  .search-form input:hover {
+  .search-form input:hover,
+  .search-form input:focus {
     width: 250px;
     margin-left: -10px;
   }

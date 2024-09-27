@@ -40,15 +40,17 @@
   color: black;
 }
 
-.short-info h1::after {
-  content: '☆';
-  color: yellow;
+.favorite-btn {
   position: absolute;
-  font-size: 4rem;
-  font-weight: bolder;
   top: 0;
   right: 0;
-  transform: translateY(-20%);
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--star-yellow);
+  font-size: 3.5rem;
+  line-height: 2rem;
 }
 
 .short-info h2 {
@@ -185,5 +187,18 @@
 
   .map-toggle span {
     font-size: 0.8rem;
+  }
+
+  .favorite-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    color: var(--star-yellow);
+    font-size: 2.5rem;
+    line-height: 1rem;
   }
 }

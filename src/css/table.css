@@ -30,8 +30,33 @@ th:hover::before {
     height: 4px;
 }
 
-th:hover::after {
+/*th:hover::after {*/
+/*    content: '↓';*/
+/*    color: darkcyan;*/
+/*    margin-left: 10px;*/
+/*    position: absolute;*/
+/*    right: 10px;*/
+/*    top: 50%;*/
+/*    transform: translateY(-50%);*/
+/*}*/
+
+.sorted-asc::before,
+.sorted-desc::before {
+    height: 4px;
+}
+
+.sorted-asc::after {
     content: '↓';
+    color: darkcyan;
+    margin-left: 10px;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.sorted-desc::after {
+    content: '↑';
     color: darkcyan;
     margin-left: 10px;
     position: absolute;
