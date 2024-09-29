@@ -1,8 +1,8 @@
-import {findTeacherById, formatShortTeacherCard, formatTeacherCard} from "./user-card/teacher-card";
+import {formatShortTeacherCard, formatTeacherCard} from "./user-card/teacher-card";
 import {FormattedUser} from "./utils/interfaces";
-import {validatedUsers} from "./data";
-import {clearFilters} from "./task2";
-import {addTeachersInTable} from "./task3";
+import {clearFilters} from "./filtering";
+import {addTeachersInTable} from "./sorting";
+import {appContext} from "./context/app-context";
 
 const teacherGrid = document.querySelector('.all-teachers');
 const teacherScroll = document.querySelector('.scroll');
@@ -41,7 +41,7 @@ function addShowPopupEvent(element: Element) {
         if (!card) return;
 
         const userID = card.getAttribute('data-user-id');
-        updateTeacherInfoPopup(findTeacherById(userID));
+        updateTeacherInfoPopup(appContext.getTeacherById(userID));
         teacherInfoPopup.showModal();
     });
 }
@@ -85,10 +85,10 @@ const favoriteBtn = document.querySelector(".favorite-btn") as HTMLElement;
 favoriteBtn.addEventListener('click', event => {
     const teacherInfoElem = (event.target as HTMLElement).closest<HTMLElement>('.main-teacher-info');
     const userID = teacherInfoElem.getAttribute('data-user-id');
-    const user = findTeacherById(userID);
+    const user = appContext.getTeacherById(userID);
     user.favorite = !user.favorite;
     favoriteBtn.innerText = favoriteBtn.innerText === '☆'? '★' : '☆';
-    addTeachersOnPage(validatedUsers);
+    addTeachersOnPage(appContext.getTeachers());
     clearFilters();
 });
 

@@ -1,8 +1,8 @@
 import {FormattedUser} from "./utils/interfaces";
-import {validatedUsers} from "./data";
 import {addTeachersOnPage} from "./task1";
 import {generateId} from "./utils/utils";
 import {addTeacherPopup} from "./teacher-form";
+import {appContext} from "./context/app-context";
 
 const form = document.querySelector<HTMLFormElement>('#add-teacher-form');
 
@@ -19,8 +19,8 @@ form.addEventListener('submit', async (event) => {
     formObject.id = generateId(13);
 
     console.log(formObject);
-    validatedUsers.push(formObject as FormattedUser);
-    addTeachersOnPage(validatedUsers);
+    appContext.addTeacher(formObject as FormattedUser);
+    addTeachersOnPage(appContext.getTeachers());
     form.reset();
     addTeacherPopup.close();
 });
