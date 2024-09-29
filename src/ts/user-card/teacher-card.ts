@@ -1,5 +1,4 @@
 import {FormattedUser} from "../utils/interfaces";
-import {validatedUsers} from "../data";
 
 export function formatTeacherCard(user: FormattedUser) {
     return `
@@ -38,8 +37,4 @@ function getImageElem(user: FormattedUser) {
 function getInitials(fullName: string) {
     const parts = fullName.split(' ');
     return `${parts[0].charAt(0).toLocaleUpperCase()}.${parts[1].charAt(0).toLocaleUpperCase()}.`;
-}
-
-export function findTeacherById(id: string) {
-    return validatedUsers.find(user => user.id === id);
 }

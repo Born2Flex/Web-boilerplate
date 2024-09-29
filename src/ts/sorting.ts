@@ -1,6 +1,6 @@
 import {FormattedUser} from "./utils/interfaces";
 import {Order, sortUsers} from "./utils/sorting";
-import {validatedUsers} from "./data";
+import {appContext} from "./context/app-context";
 
 const table = document.querySelector('#table')
 const tableHeader = document.querySelector('#table-header')
@@ -29,7 +29,7 @@ tableHeader.addEventListener('click', event => {
    }
 
    column.classList.add('sorted-' + direction)
-   addTeachersInTable(sortUsers(validatedUsers, sortColumn, direction));
+   addTeachersInTable(sortUsers(appContext.getTeachers(), sortColumn, direction));
 });
 
 export function addTeachersInTable(teachers: FormattedUser[]) {
