@@ -9,16 +9,28 @@ import {fetchUsers} from "./data";
 import {appContext} from "./context/app-context";
 import {formatUsersAndAddFields} from "./utils/user-formatting";
 import {validateUsers} from "./utils/validation";
+import {FormattedUser} from "./utils/interfaces";
+import {preparePagination} from "./pagination/pagination";
 
+const minNumOfTeachers = 50;
 
 document.addEventListener('DOMContentLoaded', async () =>  {
-    const fetchedUsers = await fetchUsers();
-    console.log(`Received response: ${JSON.stringify(fetchedUsers)}`);
-    console.log(fetchedUsers);
-    console.log(formatUsersAndAddFields(fetchedUsers));
-    console.log(validateUsers(formatUsersAndAddFields(fetchedUsers)));
+    let validatedTeachers: FormattedUser[] = [];
+    while (validatedTeachers.length <= minNumOfTeachers) {
+        const teachers = await fetchUsers(minNumOfTeachers);
+        if (teachers === undefined) {
+            await new Promise(r => setTimeout(r, 500));
+            continue;
+        }
+        console.log(validateUsers(formatUsersAndAddFields(teachers)));
+        validatedTeachers = validatedTeachers.concat(validateUsers(formatUsersAndAddFields(teachers)));
+    }
     console.log(appContext.getTeachers());
-    appContext.setTeachers(validateUsers(formatUsersAndAddFields(fetchedUsers)));
+
+    appContext.setTeachers(validatedTeachers.slice(0,minNumOfTeachers));
+    appContext.setDisplayedTeachers(validatedTeachers.slice(0,minNumOfTeachers));
+
     console.log(appContext.getTeachers());
-    addTeachersOnPage(appContext.getTeachers());
+    preparePagination();
+    addTeachersOnPage();
 })

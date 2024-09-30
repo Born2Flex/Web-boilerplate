@@ -1,6 +1,7 @@
 import {FormattedUser} from "./utils/interfaces";
 import {Order, sortUsers} from "./utils/sorting";
 import {appContext} from "./context/app-context";
+import {recordsPerPage} from "./pagination/pagination";
 
 const table = document.querySelector('#table')
 const tableHeader = document.querySelector('#table-header')
@@ -20,7 +21,7 @@ const map = {
 tableHeader.addEventListener('click', event => {
    const column = event.target as HTMLElement;
 
-   headerCells.forEach(column => column.classList.remove('sorted-asc', 'sorted-desc'))
+   clearSorting();
    if (sortColumn !== null && sortColumn === map[column.innerText]) {
        direction = direction === 'asc'? 'desc' : 'asc';
    } else {
@@ -28,13 +29,19 @@ tableHeader.addEventListener('click', event => {
        direction = 'asc';
    }
 
-   column.classList.add('sorted-' + direction)
-   addTeachersInTable(sortUsers(appContext.getTeachers(), sortColumn, direction));
+   column.classList.add('sorted-' + direction);
+   appContext.setDisplayedTeachers(sortUsers(appContext.getDisplayedTeachers(), sortColumn, direction));
+   addTeachersInTable();
 });
 
-export function addTeachersInTable(teachers: FormattedUser[]) {
+export function clearSorting() {
+    headerCells.forEach(column => column.classList.remove('sorted-asc', 'sorted-desc'));
+}
+
+export function addTeachersInTable() {
+    const offset = recordsPerPage * (appContext.currentPage  - 1)
     let html = '';
-    teachers.forEach(user => {
+    appContext.getDisplayedTeachers().slice(offset, offset + recordsPerPage).forEach(user => {
         html += formatTableRow(user);
     })
     table.innerHTML = html;

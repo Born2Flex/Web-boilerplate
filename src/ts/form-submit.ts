@@ -20,7 +20,7 @@ form.addEventListener('submit', async (event) => {
 
     console.log(formObject);
     appContext.addTeacher(formObject as FormattedUser);
-    addTeachersOnPage(appContext.getTeachers());
+    addTeachersOnPage();
     form.reset();
     addTeacherPopup.close();
 });

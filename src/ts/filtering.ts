@@ -1,7 +1,9 @@
 import {FilterParams, filterUsers} from "./utils/filtering";
-import {addAllTeachersOnGrid} from "./task1";
+import {addAllTeachersOnGrid, addTeachersOnPage} from "./task1";
 import {clearSearchInput} from "./search";
 import {appContext} from "./context/app-context";
+import {addPagination} from "./pagination/pagination";
+import {clearSorting} from "./sorting";
 
 const age = document.querySelector<HTMLSelectElement>('#age');
 const region = document.querySelector<HTMLSelectElement>('#region');
@@ -25,13 +27,21 @@ function addSelectFilterEvent(element: HTMLSelectElement | HTMLInputElement, fie
         if (element instanceof HTMLSelectElement) {
             filters[field] = element.options[element.selectedIndex].text;
         } else {
-            filters[field] = element.checked;
+            if (element.checked) {
+                filters[field] = true;
+            } else {
+                delete filters[field];
+            }
         }
         if (filters[field] === '') {
             delete filters[field];
         }
         clearSearchInput();
-        addAllTeachersOnGrid(filterUsers(appContext.getTeachers(), filters));
+        clearSorting();
+        // addAllTeachersOnGrid(filterUsers(appContext.getTeachers(), filters));
+        appContext.setDisplayedTeachers(filterUsers(appContext.getTeachers(), filters));
+
+        addTeachersOnPage();
     });
 }
 

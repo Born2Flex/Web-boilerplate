@@ -10,9 +10,9 @@ export const baseUrl = 'https://randomuser.me/api/';
 // const fetchedUsers = await fetchUsers();
 // console.log(fetchedUsers);
 
-export async function fetchUsers() {
+export async function fetchUsers(num: number) {
     try {
-        const response = await fetch(baseUrl + '?results=50');
+        const response = await fetch(baseUrl + `?results=${num}`);
         const responseJson = await response.json();
         return responseJson.results;
     } catch (error) {

@@ -3,27 +3,29 @@ import {FormattedUser} from "./utils/interfaces";
 import {clearFilters} from "./filtering";
 import {addTeachersInTable} from "./sorting";
 import {appContext} from "./context/app-context";
+import {addPagination} from "./pagination/pagination";
 
 const teacherGrid = document.querySelector('.all-teachers');
 const teacherScroll = document.querySelector('.scroll');
 
-export function addTeachersOnPage(teachers: FormattedUser[]) {
-    addAllTeachersOnGrid(teachers);
-    addFavTeachersOnScroll(teachers);
-    addTeachersInTable(teachers);
+export function addTeachersOnPage() {
+    addAllTeachersOnGrid();
+    addFavTeachersOnScroll();
+    addTeachersInTable();
+    addPagination();
 }
 
-export function addAllTeachersOnGrid(teachers: FormattedUser[]) {
+export function addAllTeachersOnGrid() {
     let html = '';
-    teachers.forEach(user => {
+    appContext.getDisplayedTeachers().forEach(user => {
         html += formatTeacherCard(user);
     })
     teacherGrid.innerHTML = html;
 }
 
-function addFavTeachersOnScroll(teachers: FormattedUser[]) {
+function addFavTeachersOnScroll() {
     let html = '';
-    teachers.filter(user => user.favorite)
+    appContext.getDisplayedTeachers().filter(user => user.favorite)
         .forEach(user => {
             html += formatShortTeacherCard(user);
         })
@@ -88,7 +90,7 @@ favoriteBtn.addEventListener('click', event => {
     const user = appContext.getTeacherById(userID);
     user.favorite = !user.favorite;
     favoriteBtn.innerText = favoriteBtn.innerText === '☆'? '★' : '☆';
-    addTeachersOnPage(appContext.getTeachers());
+    addTeachersOnPage();
     clearFilters();
 });
 
