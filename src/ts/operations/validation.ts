@@ -1,4 +1,4 @@
-import {FormattedUser} from './interfaces';
+import {FormattedUser} from '../utils/interfaces';
 import {getCountryCode} from 'countries-list'
 import {CountryCode, isValidPhoneNumber} from "libphonenumber-js";
 

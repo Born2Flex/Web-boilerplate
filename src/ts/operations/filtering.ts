@@ -1,4 +1,4 @@
-import {FormattedUser, Gender} from './interfaces';
+import {FormattedUser, Gender} from '../utils/interfaces';
 import {getPredicate} from "./search";
 
 export interface FilterParams {

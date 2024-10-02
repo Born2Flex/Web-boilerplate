@@ -1,4 +1,4 @@
-import {FormattedUser} from './interfaces';
+import {FormattedUser} from '../utils/interfaces';
 
 export function findUsersByParam(users: FormattedUser[], param: any): FormattedUser[] {
     const ageComparisonRegex = /^(<=|>=|<|>|=)\s*(\d+)$/;

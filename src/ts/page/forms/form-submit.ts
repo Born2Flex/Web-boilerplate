@@ -1,8 +1,12 @@
-import {FormattedUser} from "./utils/interfaces";
-import {addTeachersOnPage} from "./task1";
-import {generateId} from "./utils/utils";
+import {FormattedUser} from "../../utils/interfaces";
+import {addTeachersOnPage} from "../main";
+import {generateId} from "../../utils/utils";
 import {addTeacherPopup} from "./teacher-form";
-import {appContext} from "./context/app-context";
+import {appContext} from "../../context/app-context";
+import {clearFilters} from "../operations/filtering";
+import {clearSorting} from "../operations/sorting";
+import {clearSearchInput} from "../operations/search";
+import {addTeacherOnServer} from "../../data/data";
 
 const form = document.querySelector<HTMLFormElement>('#add-teacher-form');
 
@@ -20,7 +24,12 @@ form.addEventListener('submit', async (event) => {
 
     console.log(formObject);
     appContext.addTeacher(formObject as FormattedUser);
-    addTeachersOnPage(appContext.getTeachers());
+    clearFilters();
+    clearSorting();
+    clearSearchInput();
+    addTeachersOnPage();
     form.reset();
     addTeacherPopup.close();
+
+    await addTeacherOnServer(formObject as FormattedUser);
 });
