@@ -28,6 +28,7 @@ export function preparePagination() {
 
 export function addTablePage() {
     const newElem= `<a href="#" class="page-link">${appContext.numOfPages}</a>`
+    console.log(newElem)
     paginationElems = [
         ...paginationElems.slice(0, appContext.numOfPages - 1),
         newElem,

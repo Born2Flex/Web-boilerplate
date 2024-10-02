@@ -1,7 +1,7 @@
 import {FormattedUser} from "../../utils/interfaces";
 import {Order, sortUsers} from "../../operations/sorting";
 import {appContext} from "../../context/app-context";
-import {recordsPerPage} from "../pagination/pagination";
+import {addPagination, recordsPerPage} from "../pagination/pagination";
 
 const table = document.querySelector('#table')
 const tableHeader = document.querySelector('#table-header')
@@ -32,6 +32,7 @@ tableHeader.addEventListener('click', event => {
    column.classList.add('sorted-' + direction);
    appContext.setDisplayedTeachers(sortUsers(appContext.getDisplayedTeachers(), sortColumn, direction));
    addTeachersInTable();
+   addPagination();
 });
 
 export function clearSorting() {

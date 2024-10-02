@@ -25,6 +25,11 @@
   font-size: 1.6rem;
 }
 
+#load-more-btn {
+  font-size: 1.3rem;
+  padding: 1rem;
+}
+
 @media (max-width: 910px) {
   .navigation {
     flex-wrap: wrap;

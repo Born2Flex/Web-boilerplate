@@ -3,6 +3,9 @@ import {addTeachersOnPage} from "../main";
 import {generateId} from "../../utils/utils";
 import {addTeacherPopup} from "./teacher-form";
 import {appContext} from "../../context/app-context";
+import {clearFilters} from "../operations/filtering";
+import {clearSorting} from "../operations/sorting";
+import {clearSearchInput} from "../operations/search";
 
 const form = document.querySelector<HTMLFormElement>('#add-teacher-form');
 
@@ -20,6 +23,9 @@ form.addEventListener('submit', async (event) => {
 
     console.log(formObject);
     appContext.addTeacher(formObject as FormattedUser);
+    clearFilters();
+    clearSorting();
+    clearSearchInput();
     addTeachersOnPage();
     form.reset();
     addTeacherPopup.close();

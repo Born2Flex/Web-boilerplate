@@ -5,6 +5,7 @@ import {addTeachersOnPage} from "./page/main";
 import './page/operations/filtering'
 import './page/operations/search'
 import './page/forms/form-submit'
+import './page/pagination/load-more-btn'
 import {fetchUsers} from "./data/data";
 import {appContext} from "./context/app-context";
 import {formatUsersAndAddFields} from "./utils/user-formatting";
@@ -28,7 +29,6 @@ document.addEventListener('DOMContentLoaded', async () =>  {
     console.log(appContext.getTeachers());
 
     appContext.setTeachers(validatedTeachers.slice(0,minNumOfTeachers));
-    appContext.setDisplayedTeachers(validatedTeachers.slice(0,minNumOfTeachers));
 
     console.log(appContext.getTeachers());
     preparePagination();

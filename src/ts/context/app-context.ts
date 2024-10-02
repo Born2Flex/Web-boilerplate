@@ -7,6 +7,7 @@ export interface AppContext {
     currentPage: number,
     numOfPages: number,
     addTeacher: (user: FormattedUser) => void;
+    addTeachersList: (user: FormattedUser[]) => void;
     setTeachers: (users: FormattedUser[]) => void;
     getTeachers: () => FormattedUser[];
     getDisplayedTeachers: () => FormattedUser[];
@@ -21,16 +22,29 @@ export const appContext: AppContext = {
     numOfPages: 5,
 
     addTeacher(teacher: FormattedUser) {
+        this.numOfPages = Math.ceil(this.teachers.length / recordsPerPage);
         this.teachers.push(teacher);
-        this.displayedTeachers.push(teacher);
+        this.displayedTeachers = this.teachers;
         if (this.numOfPages < Math.ceil(this.teachers.length / recordsPerPage)) {
             addTablePage();
         }
         this.numOfPages = Math.ceil(this.teachers.length / recordsPerPage);
     },
 
+    addTeachersList(teachers: FormattedUser[]) {
+        this.numOfPages = Math.ceil(this.teachers.length / recordsPerPage);
+        this.teachers = this.teachers.concat(teachers);
+        this.displayedTeachers = this.teachers;
+        if (this.numOfPages < Math.ceil(this.teachers.length / recordsPerPage)) {
+            addTablePage();
+        }
+        this.numOfPages = Math.ceil(this.teachers.length / recordsPerPage);
+        this.currentPage = 1;
+    },
+
     setTeachers(teachers: FormattedUser[]) {
         this.teachers = teachers;
+        this.displayedTeachers = teachers;
         this.numOfPages = Math.ceil(this.teachers.length / recordsPerPage);
         this.currentPage = 1;
     },
