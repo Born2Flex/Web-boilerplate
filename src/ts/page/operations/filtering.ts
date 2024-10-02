@@ -1,8 +1,8 @@
-import {FilterParams, filterUsers} from "./utils/filtering";
-import {addAllTeachersOnGrid, addTeachersOnPage} from "./task1";
+import {FilterParams, filterUsers} from "../../operations/filtering";
+import {addAllTeachersOnGrid, addTeachersOnPage} from "../main";
 import {clearSearchInput} from "./search";
-import {appContext} from "./context/app-context";
-import {addPagination} from "./pagination/pagination";
+import {appContext} from "../../context/app-context";
+import {addPagination} from "../pagination/pagination";
 import {clearSorting} from "./sorting";
 
 const age = document.querySelector<HTMLSelectElement>('#age');

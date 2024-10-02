@@ -1,7 +1,7 @@
-import {FormattedUser} from "./utils/interfaces";
-import {Order, sortUsers} from "./utils/sorting";
-import {appContext} from "./context/app-context";
-import {recordsPerPage} from "./pagination/pagination";
+import {FormattedUser} from "../../utils/interfaces";
+import {Order, sortUsers} from "../../operations/sorting";
+import {appContext} from "../../context/app-context";
+import {recordsPerPage} from "../pagination/pagination";
 
 const table = document.querySelector('#table')
 const tableHeader = document.querySelector('#table-header')

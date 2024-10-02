@@ -1,8 +1,8 @@
-import {formatShortTeacherCard, formatTeacherCard} from "./user-card/teacher-card";
-import {FormattedUser} from "./utils/interfaces";
-import {clearFilters} from "./filtering";
-import {addTeachersInTable} from "./sorting";
-import {appContext} from "./context/app-context";
+import {formatShortTeacherCard, formatTeacherCard} from "./teacher-card/teacher-card";
+import {FormattedUser} from "../utils/interfaces";
+import {clearFilters} from "./operations/filtering";
+import {addTeachersInTable} from "./operations/sorting";
+import {appContext} from "../context/app-context";
 import {addPagination} from "./pagination/pagination";
 
 const teacherGrid = document.querySelector('.all-teachers');

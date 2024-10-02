@@ -1,4 +1,4 @@
-import {FormattedUser} from './interfaces';
+import {FormattedUser} from '../utils/interfaces';
 import {findUsersByParam} from "./search";
 
 export function calcPercent(users: FormattedUser[], param: any) {

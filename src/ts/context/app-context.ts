@@ -1,5 +1,5 @@
 import {FormattedUser} from "../utils/interfaces";
-import {addTablePage, recordsPerPage} from "../pagination/pagination";
+import {addTablePage, recordsPerPage} from "../page/pagination/pagination";
 
 export interface AppContext {
     teachers: FormattedUser[],

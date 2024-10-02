@@ -1,4 +1,4 @@
-import {FormattedUser} from "../utils/interfaces";
+import {FormattedUser} from "../../utils/interfaces";
 
 export function formatTeacherCard(user: FormattedUser) {
     return `

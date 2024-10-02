@@ -1,7 +1,7 @@
-import {addTeachersOnPage} from "./task1";
-import {findUsersByParam} from "./utils/search";
+import {addTeachersOnPage} from "../main";
+import {findUsersByParam} from "../../operations/search";
 import {clearFilters} from "./filtering";
-import {appContext} from "./context/app-context";
+import {appContext} from "../../context/app-context";
 import {clearSorting} from "./sorting";
 
 const searchInput = document.querySelector<HTMLInputElement>('#search-input')

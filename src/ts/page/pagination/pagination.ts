@@ -1,5 +1,5 @@
-import {appContext} from "../context/app-context";
-import {addTeachersInTable} from "../sorting";
+import {appContext} from "../../context/app-context";
+import {addTeachersInTable} from "../operations/sorting";
 
 export const recordsPerPage = 10;
 const pagePagination = document.querySelector('.pagination');

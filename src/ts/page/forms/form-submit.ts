@@ -1,8 +1,8 @@
-import {FormattedUser} from "./utils/interfaces";
-import {addTeachersOnPage} from "./task1";
-import {generateId} from "./utils/utils";
+import {FormattedUser} from "../../utils/interfaces";
+import {addTeachersOnPage} from "../main";
+import {generateId} from "../../utils/utils";
 import {addTeacherPopup} from "./teacher-form";
-import {appContext} from "./context/app-context";
+import {appContext} from "../../context/app-context";
 
 const form = document.querySelector<HTMLFormElement>('#add-teacher-form');
 
