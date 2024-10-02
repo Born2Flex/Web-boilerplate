@@ -1,4 +1,4 @@
-import {fetchUsers} from "../../data/data";
+import {fetchTeachers} from "../../data/data";
 import {recordsPerPage} from "./pagination";
 import {FormattedUser} from "../../utils/interfaces";
 import {validateUsers} from "../../operations/validation";
@@ -14,7 +14,7 @@ document.querySelector("#load-more-btn").addEventListener('click', async () => {
     console.log("Load more event");
     let validatedTeachers: FormattedUser[] = [];
     while (validatedTeachers.length <= recordsPerPage) {
-        const teachers = await fetchUsers(recordsPerPage);
+        const teachers = await fetchTeachers(recordsPerPage);
         if (teachers === undefined) {
             await new Promise(r => setTimeout(r, 500));
             continue;

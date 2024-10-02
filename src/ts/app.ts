@@ -6,7 +6,7 @@ import './page/operations/filtering'
 import './page/operations/search'
 import './page/forms/form-submit'
 import './page/pagination/load-more-btn'
-import {fetchUsers} from "./data/data";
+import {fetchTeachers} from "./data/data";
 import {appContext} from "./context/app-context";
 import {formatUsersAndAddFields} from "./utils/user-formatting";
 import {validateUsers} from "./operations/validation";
@@ -18,7 +18,7 @@ const minNumOfTeachers = 50;
 document.addEventListener('DOMContentLoaded', async () =>  {
     let validatedTeachers: FormattedUser[] = [];
     while (validatedTeachers.length <= minNumOfTeachers) {
-        const teachers = await fetchUsers(minNumOfTeachers);
+        const teachers = await fetchTeachers(minNumOfTeachers);
         if (teachers === undefined) {
             await new Promise(r => setTimeout(r, 500));
             continue;
