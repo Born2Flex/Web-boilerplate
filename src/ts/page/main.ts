@@ -20,7 +20,9 @@ export function addAllTeachersOnGrid() {
     appContext.getDisplayedTeachers().forEach(user => {
         html += formatTeacherCard(user);
     })
-    teacherGrid.innerHTML = html;
+    if (teacherGrid) {
+        teacherGrid.innerHTML = html;
+    }
 }
 
 function addFavTeachersOnScroll() {
@@ -29,7 +31,9 @@ function addFavTeachersOnScroll() {
         .forEach(user => {
             html += formatShortTeacherCard(user);
         })
-    teacherScroll.innerHTML = html;
+    if (teacherScroll) {
+        teacherScroll.innerHTML = html;
+    }
 }
 
 // Teacher info popup
@@ -37,41 +41,49 @@ function addFavTeachersOnScroll() {
 const teacherInfoCloseBtn = document.querySelector<HTMLElement>('#info-close-btn');
 const teacherInfoPopup = document.querySelector<HTMLDialogElement>('#teacher-info');
 
-function addShowPopupEvent(element: Element) {
-    element.addEventListener('click', event => {
+function addShowPopupEvent(element: Element | null) {
+    element?.addEventListener('click', event => {
         const card = (event.target as HTMLElement).closest('.card');
         if (!card) return;
 
         const userID = card.getAttribute('data-user-id');
-        updateTeacherInfoPopup(appContext.getTeacherById(userID));
-        teacherInfoPopup.showModal();
+        if (userID) {
+            const teacher = appContext.getTeacherById(userID);
+            if (teacher) {
+                updateTeacherInfoPopup(teacher);
+            }
+        }
+        teacherInfoPopup?.showModal();
     });
 }
 
 addShowPopupEvent(teacherGrid);
 addShowPopupEvent(teacherScroll);
 
-teacherInfoCloseBtn.addEventListener('click', () => {
-    teacherInfoPopup.close();
+teacherInfoCloseBtn?.addEventListener('click', () => {
+    teacherInfoPopup?.close();
 });
 
 function updateTeacherInfoPopup(user: FormattedUser) {
     const teacherInfoElem = document.querySelector<HTMLElement>('.main-teacher-info');
-    teacherInfoElem.setAttribute('data-user-id', user.id);
+    teacherInfoElem?.setAttribute('data-user-id', user.id);
 
-    const teacherImage = teacherInfoElem.children[0];
-    teacherImage.children[0].setAttribute("src", user.picture_large?? '../images/photo.jpg');
+    const teacherImage = teacherInfoElem?.children[0];
+    teacherImage?.children[0].setAttribute("src", user.picture_large ?? '../images/photo.jpg');
 
-    const teacherInfo = teacherInfoElem.children[1].children as HTMLCollection;
+    const teacherInfo = teacherInfoElem?.children[1].children as HTMLCollection;
     updateElementText(teacherInfo[0], user.full_name);
     updateElementText(teacherInfo[1], user.course);
     updateElementText(teacherInfo[2], `${user.city}, ${user.country}`);
     updateElementText(teacherInfo[3], `${user.age}, ${user.gender}`);
-    updateElementText(teacherInfo[4], user.email);
-    updateElementText(teacherInfo[5], user.phone);
+    updateElementText(teacherInfo[4], user.email ?? 'email@gmail.com');
+    updateElementText(teacherInfo[5], user.phone ?? '097 781 8811');
     updateElementText(teacherInfo[6], user.favorite ? '★' : '☆');
 
-    document.querySelector<HTMLElement>('.description').innerText = user.note;
+    const description = document.querySelector<HTMLElement>('.description');
+    if (description) {
+        description.innerText = user.note;
+    }
 }
 
 function updateElementText(element: Element | undefined, text: string) {
@@ -86,10 +98,14 @@ const favoriteBtn = document.querySelector(".favorite-btn") as HTMLElement;
 
 favoriteBtn.addEventListener('click', event => {
     const teacherInfoElem = (event.target as HTMLElement).closest<HTMLElement>('.main-teacher-info');
-    const userID = teacherInfoElem.getAttribute('data-user-id');
-    const user = appContext.getTeacherById(userID);
-    user.favorite = !user.favorite;
-    favoriteBtn.innerText = favoriteBtn.innerText === '☆'? '★' : '☆';
+    const userID = teacherInfoElem?.getAttribute('data-user-id');
+    if (userID) {
+        const teacher = appContext.getTeacherById(userID);
+        if (teacher) {
+            teacher.favorite = !teacher.favorite;
+        }
+    }
+    favoriteBtn.innerText = favoriteBtn.innerText === '☆' ? '★' : '☆';
     addTeachersOnPage();
     clearFilters();
 });

@@ -1,6 +1,6 @@
 import {FormattedUser} from '../utils/interfaces';
 
-type SortingField = 'full_name' | 'gender' | 'course' | 'age' | 'b_day' | 'country';
+export type SortingField = 'full_name' | 'gender' | 'course' | 'age' | 'b_day' | 'country';
 export type Order = 'asc' | 'desc';
 
 export function sortUsers(users: FormattedUser[], field: SortingField, order: Order = 'asc'): FormattedUser[] {

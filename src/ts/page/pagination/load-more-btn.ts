@@ -1,16 +1,16 @@
 import {fetchTeachers} from "../../data/data";
 import {recordsPerPage} from "./pagination";
 import {FormattedUser} from "../../utils/interfaces";
-import {validateUsers} from "../../operations/validation";
-import {formatUsersAndAddFields} from "../../utils/user-formatting";
+import {validateUsers} from "../../operations/validation.ts";
+import {formatUsersAndAddFields} from "../../utils/user-formatting.ts";
 import {appContext} from "../../context/app-context";
-import {addTeachersOnPage} from "../main";
+import {addTeachersOnPage} from "../main.ts";
 import {clearSorting} from "../operations/sorting";
 import {clearFilters} from "../operations/filtering";
 import {clearSearchInput} from "../operations/search";
 
 
-document.querySelector("#load-more-btn").addEventListener('click', async () => {
+document.querySelector("#load-more-btn")?.addEventListener('click', async () => {
     console.log("Load more event");
     let validatedTeachers: FormattedUser[] = [];
     while (validatedTeachers.length <= recordsPerPage) {

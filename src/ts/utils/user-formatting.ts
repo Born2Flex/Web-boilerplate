@@ -1,5 +1,5 @@
 import {FormattedUser, Gender} from './interfaces';
-import {capitalizeWord, generateId, getRandomCourse} from './utils';
+import {capitalizeWord, generateId, getRandomCourse} from './utils.ts';
 
 export function mergeUsers(users: FormattedUser[], additionalUsers: FormattedUser[]): FormattedUser[] {
     return getDistinctUsers(users.concat(additionalUsers));

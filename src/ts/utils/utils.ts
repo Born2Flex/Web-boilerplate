@@ -1,4 +1,4 @@
-import {Course, courses} from './interfaces';
+import {Course, courses} from './interfaces.ts';
 
 export function capitalizeWord(word: string) {
     return word.charAt(0).toUpperCase() + word.substring(1);

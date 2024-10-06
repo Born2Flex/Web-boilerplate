@@ -1,5 +1,4 @@
 import {FormattedUser, Gender} from '../utils/interfaces';
-import {getPredicate} from "./search";
 
 export interface FilterParams {
     region?: string;
@@ -34,11 +33,10 @@ function applyFilters(user: FormattedUser, filters: FilterParams): boolean {
         if (key === 'withPhoto' && filters.withPhoto !== undefined) {
             return user.picture_large !== undefined && user.picture_large !== null;
         }
-        if (key === 'region' && user.country !== undefined) {
-            console.log('here');
-            return regions[filters.region].includes(user.country);
+        if (key === 'region' && filters.region !== undefined && user.country !== undefined) {
+            return regions[filters.region]?.includes(user.country) ?? false;
         }
-        return user[key] === filters[key];
+        return (user as any)[key] === (filters as any)[key];
     });
 }
 
@@ -49,5 +47,8 @@ function applyAgeFilter(userAge: number | undefined, ageFilter: number | string)
     const parts = ageFilter.split('-');
     const lower = Number(parts[0]);
     const upper = Number(parts[1]);
-    return userAge >= lower && userAge <= upper;
+    if (userAge) {
+        return userAge >= lower && userAge <= upper;
+    }
+    return true;
 }

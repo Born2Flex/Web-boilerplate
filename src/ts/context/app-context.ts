@@ -12,7 +12,7 @@ export interface AppContext {
     getTeachers: () => FormattedUser[];
     getDisplayedTeachers: () => FormattedUser[];
     setDisplayedTeachers: (users: FormattedUser[]) => void;
-    getTeacherById: (id: string) => FormattedUser;
+    getTeacherById: (id: string) => FormattedUser | null;
 }
 
 export const appContext: AppContext = {
@@ -63,7 +63,7 @@ export const appContext: AppContext = {
         this.currentPage = 1;
     },
 
-    getTeacherById(id: string): FormattedUser {
-        return this.teachers.find(t => t.id === id);
+    getTeacherById(id: string): FormattedUser | null {
+        return this.teachers.find(t => t.id === id) ?? null;
     },
 };
