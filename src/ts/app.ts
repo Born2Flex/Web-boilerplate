@@ -8,12 +8,15 @@ import './page/forms/form-submit'
 import './page/popup/fav-button'
 import './page/popup/teacher-info-popup'
 import './page/pagination/load-more-btn'
+import './page/chart/section-switch'
+import './page/chart/chart-select'
 import {fetchTeachers} from "./data/data";
 import {appContext} from "./context/app-context";
 import {formatUsersAndAddFields} from "./utils/user-formatting.ts";
 import {validateUsers} from "./operations/validation.ts";
 import {FormattedUser} from "./utils/interfaces";
 import {preparePagination} from "./page/pagination/pagination";
+import {setUpAgeChart} from "./page/chart/chart";
 
 const minNumOfTeachers = 50;
 
@@ -35,4 +38,5 @@ document.addEventListener('DOMContentLoaded', async () =>  {
     console.log(appContext.getTeachers());
     preparePagination();
     addTeachersOnPage();
+    setUpAgeChart();
 })

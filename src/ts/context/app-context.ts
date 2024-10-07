@@ -1,6 +1,7 @@
 import {FormattedUser} from "../utils/interfaces";
 import {addTablePage, recordsPerPage} from "../page/pagination/pagination";
 import {Map} from "leaflet";
+import {Chart} from "chart.js/auto";
 
 export interface AppContext {
     teachers: FormattedUser[],
@@ -8,6 +9,8 @@ export interface AppContext {
     currentPage: number,
     numOfPages: number,
     map: Map | undefined,
+    chart: Chart<any, any, any> | undefined,
+    currentChart: string,
     currentTeacher: FormattedUser | undefined,
     addTeacher: (user: FormattedUser) => void;
     addTeachersList: (user: FormattedUser[]) => void;
@@ -24,7 +27,9 @@ export const appContext: AppContext = {
     currentPage: 1,
     numOfPages: 5,
     map: undefined,
+    chart: undefined,
     currentTeacher: undefined,
+    currentChart: "age",
 
     addTeacher(teacher: FormattedUser) {
         this.numOfPages = Math.ceil(this.teachers.length / recordsPerPage);

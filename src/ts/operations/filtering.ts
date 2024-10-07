@@ -8,18 +8,22 @@ export interface FilterParams {
     withPhoto?: boolean;
 }
 
-const regions: { [key: string]: string[] } = {
+export const regions: { [key: string]: string[] } = {
     'Europe': [
         "Ireland", "Finland", "Germany", "Switzerland", "Spain",
-        "Norway", "Denmark", "France", "Netherlands"
+        "Norway", "Denmark", "France", "Netherlands", "Italy",
+        "Belgium", "Austria", "Portugal", "Sweden", "Poland", "United Kingdom", "Serbia"
     ],
     'Asia': [
-        "Iran", "Turkey"
+        "Iran", "Turkey", "China", "India", "Japan",
+        "South Korea", "Indonesia", "Malaysia", "Thailand", "Vietnam", "New Zealand"
     ],
     'America': [
-        "United States", "Canada"
+        "United States", "Canada", "Brazil", "Mexico",
+        "Argentina", "Colombia", "Chile", "Peru", "Venezuela", "Uruguay"
     ]
 };
+
 
 export function filterUsers(users: FormattedUser[], filters: FilterParams): FormattedUser[] {
     return users.filter(user => applyFilters(user, filters));

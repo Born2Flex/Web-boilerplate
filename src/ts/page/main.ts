@@ -2,6 +2,7 @@ import {formatShortTeacherCard, formatTeacherCard} from "./teacher-card/teacher-
 import {addTeachersInTable} from "./operations/sorting";
 import {appContext} from "../context/app-context";
 import {addPagination} from "./pagination/pagination";
+import {updateChart} from "./chart/chart.ts";
 
 
 const teacherGrid = document.querySelector('.all-teachers');
@@ -12,6 +13,7 @@ export function addTeachersOnPage() {
     addFavTeachersOnScroll();
     addTeachersInTable();
     addPagination();
+    updateChart();
 }
 
 export function addAllTeachersOnGrid() {
