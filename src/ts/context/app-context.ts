@@ -1,11 +1,14 @@
 import {FormattedUser} from "../utils/interfaces";
 import {addTablePage, recordsPerPage} from "../page/pagination/pagination";
+import {Map} from "leaflet";
 
 export interface AppContext {
     teachers: FormattedUser[],
     displayedTeachers: FormattedUser[],
     currentPage: number,
     numOfPages: number,
+    map: Map | undefined,
+    currentTeacher: FormattedUser | undefined,
     addTeacher: (user: FormattedUser) => void;
     addTeachersList: (user: FormattedUser[]) => void;
     setTeachers: (users: FormattedUser[]) => void;
@@ -20,6 +23,8 @@ export const appContext: AppContext = {
     displayedTeachers: [],
     currentPage: 1,
     numOfPages: 5,
+    map: undefined,
+    currentTeacher: undefined,
 
     addTeacher(teacher: FormattedUser) {
         this.numOfPages = Math.ceil(this.teachers.length / recordsPerPage);

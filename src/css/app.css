@@ -202,8 +202,11 @@ hr {
   }
 }
 
-/*#map {*/
-/*  position: absolute;*/
-/*  width: 500px;*/
-/*  height: 300px;*/
-/*}*/
+#map {
+  height: 200px;
+}
+
+.map-invisible {
+  /*visibility: hidden;*/
+  display: none;
+}

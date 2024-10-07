@@ -15,6 +15,7 @@ function addShowPopupEvent(element: Element | null) {
         if (userID) {
             const teacher = appContext.getTeacherById(userID);
             if (teacher) {
+                appContext.currentTeacher = teacher;
                 updateTeacherInfoPopup(teacher);
             }
         }
@@ -22,13 +23,10 @@ function addShowPopupEvent(element: Element | null) {
     });
 }
 
-const teacherGrid = document.querySelector('.all-teachers');
-const teacherScroll = document.querySelector('.scroll');
-
-addShowPopupEvent(teacherGrid);
-addShowPopupEvent(teacherScroll);
-
 teacherInfoCloseBtn?.addEventListener('click', () => {
+    if (mapDiv) {
+        mapDiv.classList.toggle('map-invisible');
+    }
     teacherInfoPopup?.close();
 });
 
@@ -52,18 +50,23 @@ function updateTeacherInfoPopup(user: FormattedUser) {
     if (description) {
         description.innerText = user.note;
     }
-    setTimeout(() => {
-        addMap(user);
-    }, 100);
+
 }
 
 function addMap(teacher: FormattedUser) {
+    if(appContext.map !== undefined) {
+        appContext.map.off();
+        appContext.map.remove();
+    }
     const m_mono = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     });
-    const coords = [teacher.coordinates?.latitude ?? 50.4645, teacher.coordinates?.longitude ?? 30.519394197007927];
-    const map = L.map('map', {
+    const coords: [number, number] = [
+        Number(teacher.coordinates?.latitude ?? 50.4645),
+        Number(teacher.coordinates?.longitude ?? 30.519394197007927)
+    ];
+    appContext.map = L.map('map', {
         center: coords,
         zoom: 11,
         zoomControl: true,
@@ -73,14 +76,33 @@ function addMap(teacher: FormattedUser) {
     L.control.scale({
         imperial: false,
         maxWidth: 300
-    }).addTo(map);
+    }).addTo(appContext.map);
 
-    L.marker(coords).addTo(map);
+    L.marker(coords).addTo(appContext.map);
 }
-
 
 function updateElementText(element: Element | undefined, text: string) {
     if (element) {
         (element as HTMLElement).innerText = text;
     }
 }
+
+const toggleMapButton = document.querySelector('#show-map');
+const mapDiv = document.querySelector('#map');
+
+toggleMapButton?.addEventListener('click', () => {
+    if (mapDiv) {
+        mapDiv.classList.toggle('map-invisible');
+    }
+    setTimeout(() => {
+        if (appContext.currentTeacher) {
+            addMap(appContext.currentTeacher);
+        }
+    }, 100);
+});
+
+const teacherGrid = document.querySelector('.all-teachers');
+const teacherScroll = document.querySelector('.scroll');
+
+addShowPopupEvent(teacherGrid);
+addShowPopupEvent(teacherScroll);
