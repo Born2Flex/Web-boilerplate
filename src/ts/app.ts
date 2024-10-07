@@ -5,6 +5,8 @@ import {addTeachersOnPage} from "./page/main.ts";
 import './page/operations/filtering'
 import './page/operations/search'
 import './page/forms/form-submit'
+import './page/popup/fav-button'
+import './page/popup/teacher-info-popup'
 import './page/pagination/load-more-btn'
 import {fetchTeachers} from "./data/data";
 import {appContext} from "./context/app-context";
