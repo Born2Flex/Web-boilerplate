@@ -1,36 +1,36 @@
-import {FormattedUser} from '../utils/interfaces';
-import {getCountryCode} from 'countries-list'
-import {CountryCode, isValidPhoneNumber} from "libphonenumber-js";
+import _ from 'lodash';
+import { FormattedUser } from '../utils/interfaces';
+import { getCountryCode } from 'countries-list';
+import { CountryCode, isValidPhoneNumber } from "libphonenumber-js";
 
-export function validateUsers(users: FormattedUser[]) {
-    return users.filter(user => validateUser(user));
+export function validateUsers(users: FormattedUser[]): FormattedUser[] {
+    return _.filter(users, validateUser);
 }
 
 function validateUser(user: FormattedUser): boolean {
-    let isValid = true;
-    isValid &&= validateStringField(user.full_name);
-    isValid &&= validateStringField(user.gender);
-    isValid &&= validateStringField(user.note);
-    isValid &&= validateStringField(user.state);
-    isValid &&= validateStringField(user.city);
-    isValid &&= validateStringField(user.country);
-
-    isValid &&= validateNumField(user.age);
-    isValid &&= validatePhoneNum(user.phone, user.country);
-    isValid &&= validateEmail(user.email);
-    return isValid;
+    return _.every([
+        validateStringField(user.full_name),
+        validateStringField(user.gender),
+        validateStringField(user.note),
+        validateStringField(user.state),
+        validateStringField(user.city),
+        validateStringField(user.country),
+        validateNumField(user.age),
+        validatePhoneNum(user.phone, user.country),
+        validateEmail(user.email)
+    ]);
 }
 
 function validateStringField(field: any): boolean {
-    return typeof field === 'string' && field[0] === field[0].toLocaleUpperCase();
+    return _.isString(field) && _.startsWith(field, _.toUpper(field[0]));
 }
 
 function validateNumField(field: any): boolean {
-    return typeof field === 'number';
+    return _.isNumber(field);
 }
 
 function validatePhoneNum(phoneNum: any, country: any): boolean {
-    if (typeof phoneNum === 'string' && typeof country === 'string') {
+    if (_.isString(phoneNum) && _.isString(country)) {
         const countryCode = getCountryCode(country);
         if (!countryCode) {
             return false;
@@ -41,9 +41,6 @@ function validatePhoneNum(phoneNum: any, country: any): boolean {
 }
 
 function validateEmail(email: any): boolean {
-    // validate @ separate name from domain part
-    // validate domain part have at least 1 dot
-    // no spaces on start or end
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return typeof email === 'string' && emailRegex.test(email);
+    return _.isString(email) && emailRegex.test(email);
 }
