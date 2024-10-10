@@ -1,16 +1,16 @@
 import {FormattedUser} from "../../utils/interfaces";
-import {Order, sortUsers} from "../../operations/sorting";
+import {Order, SortingField, sortUsers} from "../../operations/sorting.ts";
 import {appContext} from "../../context/app-context";
 import {addPagination, recordsPerPage} from "../pagination/pagination";
 
 const table = document.querySelector('#table')
 const tableHeader = document.querySelector('#table-header')
-const headerCells = table.querySelectorAll('th');
+const headerCells = table?.querySelectorAll('th');
 
 let direction: Order = 'asc';
-let sortColumn = null;
+let sortColumn: string | null = null;
 
-const map = {
+const map: { [key: string]: string } = {
     'Name': 'full_name',
     'Specialty': 'course',
     'Age': 'b_day',
@@ -18,35 +18,42 @@ const map = {
     'Nationality': 'country'
 };
 
-tableHeader.addEventListener('click', event => {
-   const column = event.target as HTMLElement;
+tableHeader?.addEventListener('click', event => {
+    const columnElement = event.target as HTMLElement;
+    clearSorting();
 
-   clearSorting();
-   if (sortColumn !== null && sortColumn === map[column.innerText]) {
-       direction = direction === 'asc'? 'desc' : 'asc';
-   } else {
-       sortColumn = map[column.innerText];
-       direction = 'asc';
-   }
-
-   column.classList.add('sorted-' + direction);
-   appContext.setDisplayedTeachers(sortUsers(appContext.getDisplayedTeachers(), sortColumn, direction));
-   addTeachersInTable();
-   addPagination();
+    const col = columnElement.innerText;
+    if (col in map) {
+        const mappedCol = map[col];
+        if (sortColumn !== null && sortColumn === mappedCol) {
+            direction = direction === 'asc' ? 'desc' : 'asc';
+        } else {
+            sortColumn = mappedCol;
+            direction = 'asc';
+        }
+    }
+    columnElement.classList.add('sorted-' + direction);
+    appContext.setDisplayedTeachers(sortUsers(appContext.getDisplayedTeachers(), sortColumn as SortingField, direction));
+    addTeachersInTable();
+    addPagination();
 });
 
 export function clearSorting() {
-    headerCells.forEach(column => column.classList.remove('sorted-asc', 'sorted-desc'));
+    headerCells?.forEach(column => column.classList.remove('sorted-asc', 'sorted-desc'));
 }
 
 export function addTeachersInTable() {
-    const offset = recordsPerPage * (appContext.currentPage  - 1)
+    const offset = recordsPerPage * (appContext.currentPage - 1)
     let html = '';
     appContext.getDisplayedTeachers().slice(offset, offset + recordsPerPage).forEach(user => {
         html += formatTableRow(user);
     })
-    table.innerHTML = html;
-    table.prepend(tableHeader);
+    if (table) {
+        table.innerHTML = html;
+        if (tableHeader) {
+            table.prepend(tableHeader);
+        }
+    }
 }
 
 function formatTableRow(teacher: FormattedUser) {

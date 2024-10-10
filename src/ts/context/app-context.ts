@@ -1,18 +1,24 @@
 import {FormattedUser} from "../utils/interfaces";
 import {addTablePage, recordsPerPage} from "../page/pagination/pagination";
+import {Map} from "leaflet";
+import {Chart} from "chart.js/auto";
 
 export interface AppContext {
     teachers: FormattedUser[],
     displayedTeachers: FormattedUser[],
     currentPage: number,
     numOfPages: number,
+    map: Map | undefined,
+    chart: Chart<any, any, any> | undefined,
+    currentChart: string,
+    currentTeacher: FormattedUser | undefined,
     addTeacher: (user: FormattedUser) => void;
     addTeachersList: (user: FormattedUser[]) => void;
     setTeachers: (users: FormattedUser[]) => void;
     getTeachers: () => FormattedUser[];
     getDisplayedTeachers: () => FormattedUser[];
     setDisplayedTeachers: (users: FormattedUser[]) => void;
-    getTeacherById: (id: string) => FormattedUser;
+    getTeacherById: (id: string) => FormattedUser | null;
 }
 
 export const appContext: AppContext = {
@@ -20,6 +26,10 @@ export const appContext: AppContext = {
     displayedTeachers: [],
     currentPage: 1,
     numOfPages: 5,
+    map: undefined,
+    chart: undefined,
+    currentTeacher: undefined,
+    currentChart: "age",
 
     addTeacher(teacher: FormattedUser) {
         this.numOfPages = Math.ceil(this.teachers.length / recordsPerPage);
@@ -63,7 +73,7 @@ export const appContext: AppContext = {
         this.currentPage = 1;
     },
 
-    getTeacherById(id: string): FormattedUser {
-        return this.teachers.find(t => t.id === id);
+    getTeacherById(id: string): FormattedUser | null {
+        return this.teachers.find(t => t.id === id) ?? null;
     },
 };

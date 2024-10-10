@@ -1,4 +1,5 @@
-import {FormattedUser} from '../utils/interfaces';
+import _ from 'lodash';
+import { FormattedUser } from '../utils/interfaces';
 
 export function findUsersByParam(users: FormattedUser[], param: any): FormattedUser[] {
     const ageComparisonRegex = /^(<=|>=|<|>|=)\s*(\d+)$/;
@@ -6,27 +7,27 @@ export function findUsersByParam(users: FormattedUser[], param: any): FormattedU
     if (match) {
         return findByAge(users, match);
     }
-    return users.filter(user =>
-        user.full_name.toLowerCase().includes(param.toLowerCase()) ||
-        user.note?.toLowerCase().includes(param.toLowerCase()) ||
-        user.age === Number(param)
+    return _.filter(users, user =>
+        _.includes(_.toLower(user.full_name), _.toLower(param)) ||
+        _.includes(_.toLower(user.note ?? ''), _.toLower(param)) ||
+        user.age === _.toNumber(param)
     );
 }
 
-function findByAge(users: FormattedUser[], match: string[]) {
+function findByAge(users: FormattedUser[], match: RegExpMatchArray): FormattedUser[] {
     const operator = match[1];
-    const num = Number(match[2]);
+    const num = _.toNumber(match[2]);
     const predicate = getPredicate(operator);
-    return users.filter(user => predicate(user.age ?? 0, num));
+    return _.filter(users, user => predicate(user.age ?? 0, num));
 }
 
 export function getPredicate(operator: string): (a: number, b: number) => boolean {
-    switch (operator) {
-        case '>': return (a, b) => a > b;
-        case '>=': return (a, b) => a >= b;
-        case '<': return (a, b) => a < b;
-        case '<=': return (a, b) => a <= b;
-        case '=': return (a, b) => a === b;
-        default: return () => false;
-    }
+    const predicates: { [key: string]: (a: number, b: number) => boolean } = {
+        '>': _.gt,
+        '>=': _.gte,
+        '<': _.lt,
+        '<=': _.lte,
+        '=': _.eq
+    };
+    return predicates[operator] || (() => false);
 }
