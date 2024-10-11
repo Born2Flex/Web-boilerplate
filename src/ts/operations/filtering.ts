@@ -1,5 +1,5 @@
 import {FormattedUser, Gender} from '../utils/interfaces';
-import {getPredicate} from "./search";
+import _ from 'lodash';
 
 export interface FilterParams {
     region?: string;
@@ -9,45 +9,50 @@ export interface FilterParams {
     withPhoto?: boolean;
 }
 
-const regions: { [key: string]: string[] } = {
+export const regions: { [key: string]: string[] } = {
     'Europe': [
         "Ireland", "Finland", "Germany", "Switzerland", "Spain",
-        "Norway", "Denmark", "France", "Netherlands"
+        "Norway", "Denmark", "France", "Netherlands", "Italy",
+        "Belgium", "Austria", "Portugal", "Sweden", "Poland", "United Kingdom", "Serbia"
     ],
     'Asia': [
-        "Iran", "Turkey"
+        "Iran", "Turkey", "China", "India", "Japan",
+        "South Korea", "Indonesia", "Malaysia", "Thailand", "Vietnam", "New Zealand"
     ],
     'America': [
-        "United States", "Canada"
+        "United States", "Canada", "Brazil", "Mexico",
+        "Argentina", "Colombia", "Chile", "Peru", "Venezuela", "Uruguay"
     ]
 };
 
 export function filterUsers(users: FormattedUser[], filters: FilterParams): FormattedUser[] {
-    return users.filter(user => applyFilters(user, filters));
+    return _.filter(users, user => applyFilters(user, filters));
 }
 
 function applyFilters(user: FormattedUser, filters: FilterParams): boolean {
-    return Object.keys(filters).every(key => {
-        if (key === 'age' && filters.age !== undefined) {
-            return applyAgeFilter(user.age, filters.age);
+    return _.every(filters, (value, key) => {
+        if (key === 'age' && value !== undefined) {
+            return applyAgeFilter(user.age, value);
         }
-        if (key === 'withPhoto' && filters.withPhoto !== undefined) {
-            return user.picture_large !== undefined && user.picture_large !== null;
+        if (key === 'withPhoto' && value !== undefined) {
+            return Boolean(user.picture_large);
         }
-        if (key === 'region' && user.country !== undefined) {
-            console.log('here');
-            return regions[filters.region].includes(user.country);
+        if (key === 'region' && value !== undefined && user.country !== undefined) {
+            return _.includes(regions[value], user.country);
         }
-        return user[key] === filters[key];
+        return _.isEqual((user as any)[key], value);
     });
 }
 
 function applyAgeFilter(userAge: number | undefined, ageFilter: number | string): boolean {
-    if (typeof ageFilter === 'number') {
+    if (_.isNumber(ageFilter)) {
         return userAge === ageFilter;
     }
-    const parts = ageFilter.split('-');
-    const lower = Number(parts[0]);
-    const upper = Number(parts[1]);
-    return userAge >= lower && userAge <= upper;
+    if (typeof ageFilter !== "number") {
+        const parts = ageFilter.split('-').map(_.toNumber) as number[];
+        if (userAge) {
+            return userAge >= parts[0] && userAge <= parts[1];
+        }
+    }
+    return true;
 }

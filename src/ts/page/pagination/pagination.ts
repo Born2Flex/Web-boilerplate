@@ -4,7 +4,7 @@ import {addTeachersInTable} from "../operations/sorting";
 export const recordsPerPage = 10;
 const pagePagination = document.querySelector('.pagination');
 
-pagePagination.addEventListener('click', event => {
+pagePagination?.addEventListener('click', event => {
     event.preventDefault();
     const link = (event.target as HTMLElement).closest('.page-link') as HTMLAnchorElement;
     if (!link) return;
@@ -52,37 +52,35 @@ function setupTablePaging() {
         for (let i = 2; i < numOfPages; i++) {
             paginationElements += paginationElems[i - 1];
         }
-    } else {
-        if (currentPage == 1 || currentPage == 2) { // OK
-            paginationElements += paginationElems[1]; // 2
-            paginationElements += paginationElems[2]; // 3
-            paginationElements += '<span>...</span>';
-        } else if (currentPage == numOfPages || currentPage == numOfPages - 1) { // OK
-            paginationElements += '<span>...</span>';
-            paginationElements += paginationElems[numOfPages - 3]; // pre pre last
-            paginationElements += paginationElems[numOfPages - 2]; // pre last
-        } else {
-            if (currentPage - 3 <= 0) { // start
-                for (let i = 0; i <= 2; i++) {
-                    paginationElements += paginationElems[currentPage - 2 + i];
-                }
-                paginationElements += '<span>...</span>';
-            } else if (currentPage + 2 >= numOfPages) { // end
-                paginationElements += '<span>...</span>';
-                for (let i = 0; i <= 2; i++) {
-                    paginationElements += paginationElems[currentPage - 2 + i];
-                }
-            } else {
-                paginationElements += '<span>...</span>';
-                for (let i = 0; i <= 2; i++) {
-                    paginationElements += paginationElems[currentPage - 2 + i];
-                }
-                paginationElements += '<span>...</span>';
-            }
+    } else if (currentPage == 1 || currentPage == 2) { // OK
+        paginationElements += paginationElems[1]; // 2
+        paginationElements += paginationElems[2]; // 3
+        paginationElements += '<span>...</span>';
+    } else if (currentPage == numOfPages || currentPage == numOfPages - 1) { // OK
+        paginationElements += '<span>...</span>';
+        paginationElements += paginationElems[numOfPages - 3]; // pre pre last
+        paginationElements += paginationElems[numOfPages - 2]; // pre last
+    } else if (currentPage - 3 <= 0) { // start
+        for (let i = 0; i <= 2; i++) {
+            paginationElements += paginationElems[currentPage - 2 + i];
         }
+        paginationElements += '<span>...</span>';
+    } else if (currentPage + 2 >= numOfPages) { // end
+        paginationElements += '<span>...</span>';
+        for (let i = 0; i <= 2; i++) {
+            paginationElements += paginationElems[currentPage - 2 + i];
+        }
+    } else {
+        paginationElements += '<span>...</span>';
+        for (let i = 0; i <= 2; i++) {
+            paginationElements += paginationElems[currentPage - 2 + i];
+        }
+        paginationElements += '<span>...</span>';
     }
     if (numOfPages > 1) {
         paginationElements += paginationElems[paginationElems.length - 1];
     }
-    pagePagination.innerHTML = paginationElements;
+    if (pagePagination) {
+        pagePagination.innerHTML = paginationElements;
+    }
 }

@@ -4,6 +4,10 @@
     justify-content: center;
 }
 
+#statistics > h2 {
+    cursor: pointer;
+}
+
 th {
     position: relative;
     color: #797982;
@@ -29,16 +33,6 @@ th::before {
 th:hover::before {
     height: 4px;
 }
-
-/*th:hover::after {*/
-/*    content: '↓';*/
-/*    color: darkcyan;*/
-/*    margin-left: 10px;*/
-/*    position: absolute;*/
-/*    right: 10px;*/
-/*    top: 50%;*/
-/*    transform: translateY(-50%);*/
-/*}*/
 
 .sorted-asc::before,
 .sorted-desc::before {

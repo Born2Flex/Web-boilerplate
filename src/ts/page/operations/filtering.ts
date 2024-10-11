@@ -1,8 +1,7 @@
-import {FilterParams, filterUsers} from "../../operations/filtering";
-import {addAllTeachersOnGrid, addTeachersOnPage} from "../main";
+import {FilterParams, filterUsers} from "../../operations/filtering.ts";
+import {addTeachersOnPage} from "../main.ts";
 import {clearSearchInput} from "./search";
 import {appContext} from "../../context/app-context";
-import {addPagination} from "../pagination/pagination";
 import {clearSorting} from "./sorting";
 
 const age = document.querySelector<HTMLSelectElement>('#age');
@@ -15,32 +14,38 @@ let filters: FilterParams = {};
 
 export function clearFilters() {
     filters = {};
-    age.selectedIndex = 0;
-    region.selectedIndex = 0;
-    gender.selectedIndex = 0;
-    withPhoto.checked = false;
-    isFavorite.checked = false;
+    if (age) {
+        age.selectedIndex = 0;
+    }
+    if (region) {
+        region.selectedIndex = 0;
+    }
+    if (gender) {
+        gender.selectedIndex = 0;
+    }
+    if (withPhoto) {
+        withPhoto.checked = false;
+    }
+    if (isFavorite) {
+        isFavorite.checked = false;
+    }
 }
 
-function addSelectFilterEvent(element: HTMLSelectElement | HTMLInputElement, field: string) {
-    element.addEventListener('change', () => {
+function addSelectFilterEvent(element: HTMLSelectElement | HTMLInputElement | null, field: keyof FilterParams) {
+    element?.addEventListener('change', () => {
         if (element instanceof HTMLSelectElement) {
-            filters[field] = element.options[element.selectedIndex].text;
+            filters[field] = element.options[element.selectedIndex].text as any;
+        } else if (element.checked) {
+            filters[field] = true as any;
         } else {
-            if (element.checked) {
-                filters[field] = true;
-            } else {
-                delete filters[field];
-            }
+            delete filters[field];
         }
         if (filters[field] === '') {
             delete filters[field];
         }
         clearSearchInput();
         clearSorting();
-        // addAllTeachersOnGrid(filterUsers(appContext.getTeachers(), filters));
         appContext.setDisplayedTeachers(filterUsers(appContext.getTeachers(), filters));
-
         addTeachersOnPage();
     });
 }

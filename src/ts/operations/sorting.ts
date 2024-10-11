@@ -1,6 +1,7 @@
 import {FormattedUser} from '../utils/interfaces';
+import _ from 'lodash';
 
-type SortingField = 'full_name' | 'gender' | 'course' | 'age' | 'b_day' | 'country';
+export type SortingField = 'full_name' | 'gender' | 'course' | 'age' | 'b_day' | 'country';
 export type Order = 'asc' | 'desc';
 
 export function sortUsers(users: FormattedUser[], field: SortingField, order: Order = 'asc'): FormattedUser[] {
@@ -22,25 +23,13 @@ function isNumField(field: string): boolean {
 }
 
 function sortUsersByStringField(users: FormattedUser[], field: SortingField, order: Order = 'asc'): FormattedUser[] {
-    return users.sort((a, b) => {
-        const fieldA = a[field] as string;
-        const fieldB = b[field] as string;
-        return order === 'asc' ? fieldA.localeCompare(fieldB) : fieldB.localeCompare(fieldA);
-    });
+    return _.orderBy(users, [user => _.toLower(user[field] as string)], [order]);
 }
 
 function sortUsersByNumField(users: FormattedUser[], field: SortingField, order: Order = 'asc'): FormattedUser[] {
-    return users.sort((a, b) => {
-        const fieldA = a[field] as number;
-        const fieldB = b[field] as number;
-        return order === 'asc' ? fieldA - fieldB : fieldB - fieldA;
-    });
+    return _.orderBy(users, [field], [order]);
 }
 
 function sortUsersByDateField(users: FormattedUser[], field: SortingField, order: Order = 'asc'): FormattedUser[] {
-    return users.sort((a, b) => {
-        const fieldA = new Date(a[field] as string);
-        const fieldB = new Date(b[field] as string);
-        return order === 'asc' ? fieldB.getTime() - fieldA.getTime() : fieldA.getTime() - fieldB.getTime();
-    });
+    return _.orderBy(users, [user => new Date(user[field] as string)], [order]);
 }

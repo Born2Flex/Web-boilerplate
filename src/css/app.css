@@ -201,3 +201,45 @@ hr {
     margin-top: 0;
   }
 }
+
+#map {
+  height: 200px;
+}
+
+.map-invisible {
+  display: none;
+}
+
+#chart-wrapper {
+  display: flex;
+  justify-content: center;
+  height: 700px;
+  width: 100%;
+}
+
+#chart-selector {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+#chart-selector button {
+  background: none;
+  border: 1px solid var(--orange);
+  cursor: pointer;
+  font-size: 1rem;
+  color: var(--orange);
+  padding: 0.7rem 1rem;
+  margin: 0 0.5rem;
+  width: 170px;
+}
+
+#chart-selector button:hover {
+  background-color: var(--orange);
+  color: white;
+}
+
+#chart {
+  width: 100%;
+  height: 500px;
+}

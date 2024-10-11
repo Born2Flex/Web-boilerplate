@@ -1,16 +1,7 @@
-import {additionalUsers, randomUserMock} from '../FE4U-Lab2-mock';
-import {addFieldsToUsers, formatUsersAndAddFields, mergeUsers} from "../utils/user-formatting";
-import {validateUsers} from "../operations/validation";
 import {FormattedUser} from "../utils/interfaces";
-
-export const mergedUsers = mergeUsers(formatUsersAndAddFields(randomUserMock), addFieldsToUsers(additionalUsers));
-export let validatedUsers = validateUsers(mergedUsers);
 
 export const baseUrl = 'https://randomuser.me/api/';
 const jsonServerUrl = "http://localhost:3000/teachers"
-
-// const fetchedUsers = await fetchUsers();
-// console.log(fetchedUsers);
 
 export async function fetchTeachers(num: number) {
     try {

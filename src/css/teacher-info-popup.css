@@ -61,7 +61,7 @@
 
 .short-info p {
   font-size: 1rem;
-  margin-top: 1rem;
+  margin-top: 0.9rem;
 }
 
 .teacher-email,
@@ -76,17 +76,22 @@
 }
 
 .map-toggle {
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   text-align: left;
 }
 
-.map-toggle span {
+.map-toggle button {
   position: relative;
   color: darkcyan;
   cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0 0 1rem 0;
+  font-size: inherit;
 }
 
-.map-toggle span::after {
+.map-toggle button::after {
   content: '';
   position: absolute;
   left: 0;
@@ -139,7 +144,7 @@
   }
 
   .description,
-  .map-toggle span {
+  .map-toggle button {
     font-size: 1.2rem;
     margin-top: 1rem;
   }
@@ -185,7 +190,7 @@
     margin-top: 0.5rem;
   }
 
-  .map-toggle span {
+  .map-toggle button {
     font-size: 0.8rem;
   }
 
